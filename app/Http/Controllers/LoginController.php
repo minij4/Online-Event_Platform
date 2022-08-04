@@ -27,7 +27,7 @@ class LoginController extends Controller
             return redirect("loged/home");
         }
   
-        return redirect("login")->with('msg', 'failed');
+        return  redirect()->route('login')->with('error', 'Wrong email or password!!');
     }
 
     public function registration()
@@ -43,13 +43,11 @@ class LoginController extends Controller
             'password' => 'required|min:7',
         ]);
            
-        $user = User::create(request(['username', 'email', 'password']));
-        
-		$check = auth()->login($user);
-        
-		if($check) {
-			return redirect("loged/home");
-		}
+        $data = $request->all();
+        $user = $this->create($data);
+        auth()->login($user);
+
+		return redirect("loged/home");
     }
 
     public function create(array $data)
@@ -61,14 +59,7 @@ class LoginController extends Controller
 		]);
     }    
 
-    public function home()
-    {
-        if(Auth::check()){
-            return view('loged/home');
-        }
-  
-        return redirect("login")->withSuccess('You are not allowed to access');
-    }
+    
     
     public function signOut() {
         Session::flush();

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8ea6e37b9df13f57393d506f3e6b0b46",
+    "content-hash": "72bfda4669d611cf42de1474718527df",
     "packages": [
         {
             "name": "brick/math",
@@ -892,6 +892,56 @@
                 }
             ],
             "time": "2022-06-20T21:43:11+00:00"
+        },
+        {
+            "name": "haruncpi/laravel-h",
+            "version": "v0.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/haruncpi/laravel-h.git",
+                "reference": "cf56d69925d8a8f31758c0202eed4fdc9556b17e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/haruncpi/laravel-h/zipball/cf56d69925d8a8f31758c0202eed4fdc9556b17e",
+                "reference": "cf56d69925d8a8f31758c0202eed4fdc9556b17e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Haruncpi\\LaravelH\\LaravelHServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "Haruncpi\\LaravelH\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "cc-by-4.0"
+            ],
+            "authors": [
+                {
+                    "name": "Md.Harun-Ur-Rashid",
+                    "email": "harun.cox@gmail.com"
+                }
+            ],
+            "description": "A helper package for Laravel Framework",
+            "support": {
+                "issues": "https://github.com/haruncpi/laravel-h/issues",
+                "source": "https://github.com/haruncpi/laravel-h/tree/v0.0.3"
+            },
+            "time": "2021-01-16T06:18:43+00:00"
         },
         {
             "name": "laravel/framework",
