@@ -31,7 +31,7 @@
                 <div class="col">
                     <div class="mb-6">
                         <input type="file" name="file" id="file">
-                        @error('avatar')<small class="text-red-500">{{ $message }}</small>@enderror
+                        @error('file')<small class="text-red-500">{{ $message }}</small>@enderror
                     </div>
                 </div>
                 <div class="col">
@@ -44,7 +44,7 @@
                                         <input type="radio" name="answerRadioId" value="1"> 
                                         </div>
                                     </div>
-                                    <input type="text" name="answerInput1" class="form-control" placeholder="Some text">
+                                    <input type="text" name="answerInput1" class="form-control" placeholder="atsakymas">
                                 </div>
                                 <div class="input-group  pt-3">
                                     <div class="input-group-prepend">
@@ -52,7 +52,7 @@
                                         <input type="radio" name="answerRadioId" value="2"> 
                                         </div>
                                     </div>
-                                    <input type="text" name="answerInput2" class="form-control" placeholder="Some text">
+                                    <input type="text" name="answerInput2" class="form-control" placeholder="atsakymas">
                                 </div>
                                 <div class="input-group pt-3">
                                     <div class="input-group-prepend">
@@ -60,7 +60,15 @@
                                         <input type="radio" name="answerRadioId" value="3"> 
                                         </div>
                                     </div>
-                                    <input type="text" name="answerInput3" class="form-control" placeholder="Some text">
+                                    <input type="text" name="answerInput3" class="form-control" placeholder="atsakymas">
+                                </div>
+                                <div class="input-group pt-3">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                        <input type="radio" name="answerRadioId" value="4"> 
+                                        </div>
+                                    </div>
+                                    <input type="text" name="answerInput4" class="form-control" placeholder="atsakymas">
                                 </div>
 
                         <div class="row pt-5">

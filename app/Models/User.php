@@ -10,6 +10,11 @@ class User extends Authenticatable
 {
     use HasFactory;
 
+    public function events()
+    {
+        return $this->hasMany('App\Models\Event');
+    }
+
     protected $fillable = [
         'username',
         'email',

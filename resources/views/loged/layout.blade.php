@@ -28,6 +28,7 @@
         <div class="topnav">
             <a href="/loged/home">Pagrindinis</a>
             <a href="/loged/createEvent">Sukurti renginį</a>
+            <a href="/loged/startGame">Paleisti žaidimą</a>
             <a href="/logout" class="split">Atsijungti</a>
         </div>
         <div class="relative flex items-top min-h-screen py-4 sm:pt-0">

@@ -14,6 +14,11 @@ use App\Models\Answer;
 
 class EventDataController extends Controller
 {
+    public function getUser()
+    {
+        return auth()->user()->id;
+    }
+
     public function postEvent(Request $request)
     {  
         //$img = time()."_".$request->photo->getClientOriginalName();
@@ -22,6 +27,7 @@ class EventDataController extends Controller
 
         $event = new Event;
         $event->eventName = $request->eventName;
+        $event->userId = self::getUser();
    
         if($event->save()){
             return redirect()->back()->with('success', 'Renginys sukurtas');
@@ -30,8 +36,8 @@ class EventDataController extends Controller
     
     public function getEvents()
     {
-        $data = Event::all();
-
+        $data = Event::where('userId','=',self::getUser())->get();
+        
         return view('/loged/createGame', ['data'=>$data]);
     }
     
@@ -46,18 +52,25 @@ class EventDataController extends Controller
             return redirect()->back()->with('success', 'Žaidimas sukurtas');
         }
     } 
-
-    public function getGames()
+    public function getGames($taskName = null)
     {
         $data = DB::table('games')
-        ->join('events', 'events.id', 'games.eventId')->select('events.eventName', 'games.id', 'games.gameName') ->get();
+        ->join('events', 'events.id', 'games.eventId')
+        ->where('events.userId', '=', self::getUser())
+        ->select('events.userId','events.eventName', 'games.id', 'games.gameName') 
+        ->get();
+        
 
-        return view('/loged/tasks/photoBlur', ['data'=>$data]);
+        return view('/loged/tasks/' . $taskName)->with('data', $data);
     }
+    
     public function getGames2()
     {
         $data = DB::table('games')
-        ->join('events', 'events.id', 'games.eventId')->select('events.eventName', 'games.id', 'games.gameName') ->get();
+        ->join('events', 'events.id', 'games.eventId')
+        ->where('events.userId', '=', self::getUser())
+        ->select('events.userId', 'events.eventName', 'games.id', 'games.gameName')
+        ->get();
 
         return view('/loged/startGame', ['data'=>$data]);
     }
@@ -71,13 +84,13 @@ class EventDataController extends Controller
         $task->question = $request->question;
         $task->answerId = $request->answerRadioId;
         if ($request->hasFile('file')) {
-            $path = $request->file('file')->storeAs(
-                'photos',
-                Auth::id() . '.' . $request->file('file')->getClientOriginalExtension(),
-                'public',
+            $path = $request->file('file')->store(
+                'photos', 'public'
             );
             $task->url = $path;
         }
+
+        // asset('storage/avatars/avatar.jpg');
         $task->save();
 
         // task id
@@ -101,6 +114,11 @@ class EventDataController extends Controller
         $answer3->answer = $request->answerInput3;
         $answer3->save();
 
+        $answer4 = new Answer;
+        $answer4->taskId = $taskID;
+        $answer4->answer = $request->answerInput4;
+        $answer4->save();
+
         // updating temp. id
         if($task->answerId == 1)
         {
@@ -118,6 +136,12 @@ class EventDataController extends Controller
             return redirect()->back()->with('success', 'Užduotis sukurtas');
             
         }
+        else if($task->answerId == 4)
+        {
+            DB::update('update tasks set answerId = ? where id = ?',[$answer4->id,$taskID]);
+            return redirect()->back()->with('success', 'Užduotis sukurtas');
+            
+        }
     }
 
     public function getAllGames()
@@ -128,9 +152,22 @@ class EventDataController extends Controller
         //     ->join('tasks', 'tasks.gameId', '=', 'games.id')
         //     ->get();
 
-        $events = Event::all();
-        $games = Game::all();
+        $events = Event::where('userId','=', self::getUser())->get();
         $tasks = Task::all();
+
+
+        $games = DB::table('games')
+        ->join('events', 'events.id', 'games.eventId')
+        ->where('events.userId', '=', self::getUser())
+        ->select('games.id', 'games.gameName')
+        ->get();
+
+        $tasks = DB::table('tasks')
+        ->join('games', 'tasks.gameId', 'games.id')
+        ->join('events', 'events.id', 'games.eventId')
+        ->where('events.userId', '=', self::getUser())
+        ->select('tasks.id', 'tasks.question')
+        ->get();
 
 
         return view('/loged/delete', ['events'=>$events, 'games'=>$games, 'tasks'=>$tasks]);
@@ -161,7 +198,9 @@ class EventDataController extends Controller
             return redirect()->back()->with('success', 'Užduotis ištrinta');
         }
     }
-
-
-    
+    public function startGame(Request $request)
+    {  
+        DB::update('update games set status = ? where id = ?',[1, $request->gameId]);
+        return redirect()->back()->with('success', 'Žaidimas paleistas');  
+    }  
 }
