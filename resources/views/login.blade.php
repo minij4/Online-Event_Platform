@@ -15,10 +15,10 @@
   <form method="POST" action="{{ route('login.custom') }}" autocomplete="off">
     @csrf
     <div class="form-group">
-      <label for="email">Elektroninis paštas:</label>
-      <input type="email" class="form-control" id="email" placeholder="" name="email" value="{{ old('email') }}" autocomplete="off">
-      @if ($errors->has('email'))
-        <span class="text-danger">{{ $errors->first('email') }}</span>
+      <label for="username">Prisijungimo vardas arba elektroninis paštas:</label>
+      <input type="username" class="form-control" id="username" placeholder="" name="username" value="{{ old('username') }}" autocomplete="off">
+      @if ($errors->has('username'))
+        <span class="text-danger">{{ $errors->first('username') }}</span>
       @endif
     </div>
     <div class="form-group">

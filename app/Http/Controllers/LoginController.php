@@ -18,16 +18,22 @@ class LoginController extends Controller
 	public function customLogin(Request $request)
     {
         $request->validate([
-            'email' => 'required',
+            'username' => 'required',
             'password' => 'required',
         ]);
    
-        $credentials = $request->only('email', 'password');
-        if (Auth::attempt($credentials)) {
-            return redirect("loged/home");
+        $credentials = $request->all();
+        $fieldType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+
+        if(auth()->attempt(array($fieldType => $credentials['username'], 'password' => $credentials['password'])))
+        {
+            return view('loged/home');
         }
-  
-        return  redirect()->route('login')->with('error', 'Wrong email or password!!');
+        else
+        {
+
+            return redirect()->route('login')->with('error','Klaidingas elektroninis paštas arba slaptažodis.');
+        }
     }
 
     public function registration()

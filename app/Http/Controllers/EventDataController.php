@@ -69,7 +69,7 @@ class EventDataController extends Controller
         $data = DB::table('games')
         ->join('events', 'events.id', 'games.eventId')
         ->where('events.userId', '=', self::getUser())
-        ->select('events.userId', 'events.eventName', 'games.id', 'games.gameName')
+        ->select('events.userId', 'events.eventName', 'games.id', 'games.gameName', 'games.status')
         ->get();
 
         return view('/loged/startGame', ['data'=>$data]);
@@ -200,7 +200,25 @@ class EventDataController extends Controller
     }
     public function startGame(Request $request)
     {  
-        DB::update('update games set status = ? where id = ?',[1, $request->gameId]);
-        return redirect()->back()->with('success', 'Žaidimas paleistas');  
+        $gameId = $request->gameId;
+        $active = Game::where('status', '=', 1)->first();
+        if ($active === null) {
+            DB::update('update games set status = ? where id = ?',[1, $gameId]);
+            return redirect()->back()->with('success', 'Žaidimas paleistas');
+        }
+        else if($active !== null)
+        {
+           
+            $game = Game::findOrFail($request->gameId);
+            if($game->status === 1)
+            {
+                DB::update('update games set status = ? where id = ?',[0, $gameId]);
+                return redirect()->back()->with('success', 'Žaidimas sustabdytas');
+            }
+            else
+            {
+                return redirect()->back()->with('error', 'Vienu metu gali būti paleistas tik vienas žaidimas');
+            }
+        } 
     }  
 }
