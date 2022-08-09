@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('gameId');
+            $table->integer('type')->default(0);
             $table->string('question');
             $table->integer('answerId');
             $table->time('time')->default(0);

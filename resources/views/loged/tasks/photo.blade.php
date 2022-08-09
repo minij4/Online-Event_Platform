@@ -8,12 +8,12 @@
             <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown">
                 Užduotys</button>
             <div class="dropdown-menu">
-                <a class="dropdown-item" href="photoBlur">Blur nuotrauka</a>
-                <a class="dropdown-item" href="photoMosaic">Nuotraukos mozaika</a>
-                <a class="dropdown-item" href="photo">Nuotrauka</a>
-                <a class="dropdown-item" href="videoBlur">Blur video</a>
-                <a class="dropdown-item" href="video">Video</a>
-                <a class="dropdown-item" href="audio">Audio</a>
+                <a class="dropdown-item" href="/loged/tasks/photoBlur/1">Blur nuotrauka</a>
+                <a class="dropdown-item" href="/loged/tasks/photoMosaic/2">Nuotraukos mozaika</a>
+                <a class="dropdown-item" href="/loged/tasks/photo/3">Nuotrauka</a>
+                <a class="dropdown-item" href="/loged/tasks/videoBlur/4">Blur video</a>
+                <a class="dropdown-item" href="/loged/tasks/video/5">Video</a>
+                <a class="dropdown-item" href="/loged/tasks/audio/6">Audio</a>
             </div>
         </div>
         <h4>Paprastos nuotraukos užduotis</h4>
@@ -23,7 +23,7 @@
                     {!! \Session::get('success') !!}
                 </div>
         @endif 
-        <form method="POST" action="{{ route('task.post') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('task.post', ['taskType' => $taskType]) }}" enctype="multipart/form-data">
             @csrf
             <div class="row pt-3">
                 <div class="col">

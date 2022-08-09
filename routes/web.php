@@ -40,7 +40,9 @@ Route::get('loged/createEvent', [EventController::class, 'createEvent']);
 Route::get('loged/createStage', [EventController::class, 'createStage']);
 Route::get('loged/createGame', [EventController::class, 'createGame']);
 Route::get('loged/createTask', [EventController::class, 'createTask']);
-Route::get('loged/tasks/{taskName?}', [EventDataController::class, 'getGames']);
+
+Route::get('loged/tasks/{taskName?}/{taskType?}', [EventDataController::class, 'getGames']);
+
 Route::get('loged/delete', [EventController::class, 'delete']);
 Route::get('loged/startGame', [EventController::class, 'startGame']);
 

@@ -52,7 +52,7 @@ class EventDataController extends Controller
             return redirect()->back()->with('success', 'Žaidimas sukurtas');
         }
     } 
-    public function getGames($taskName = null)
+    public function getGames($taskName = null, $taskType = null)
     {
         $data = DB::table('games')
         ->join('events', 'events.id', 'games.eventId')
@@ -60,8 +60,9 @@ class EventDataController extends Controller
         ->select('events.userId','events.eventName', 'games.id', 'games.gameName') 
         ->get();
         
+        
 
-        return view('/loged/tasks/' . $taskName)->with('data', $data);
+        return view('/loged/tasks/' . $taskName)->with('data', $data)->with('taskType', $taskType);
     }
     
     public function getGames2()
@@ -81,8 +82,14 @@ class EventDataController extends Controller
         // post task
         $task = new Task;
         $task->gameId = $request->gameId;
+        $task->type = $request->taskType;
+
+        if($request->time){
+            $task->time = $request->time;
+        }
         $task->question = $request->question;
         $task->answerId = $request->answerRadioId;
+
         if ($request->hasFile('file')) {
             $path = $request->file('file')->store(
                 'photos', 'public'
@@ -123,23 +130,23 @@ class EventDataController extends Controller
         if($task->answerId == 1)
         {
             DB::update('update tasks set answerId = ? where id = ?',[$answer1->id,$taskID]);
-            return redirect()->back()->with('success', 'Užduotis sukurtas');
+            return redirect()->back()->with('success', 'Užduotis sukurta');
         } 
         else if($task->answerId == 2)
         {
             DB::update('update tasks set answerId = ? where id = ?',[$answer2->id,$taskID]);
-            return redirect()->back()->with('success', 'Užduotis sukurtas');
+            return redirect()->back()->with('success', 'Užduotis sukurta');
         }
         else if($task->answerId == 3)
         {
             DB::update('update tasks set answerId = ? where id = ?',[$answer3->id,$taskID]);
-            return redirect()->back()->with('success', 'Užduotis sukurtas');
+            return redirect()->back()->with('success', 'Užduotis sukurta');
             
         }
         else if($task->answerId == 4)
         {
             DB::update('update tasks set answerId = ? where id = ?',[$answer4->id,$taskID]);
-            return redirect()->back()->with('success', 'Užduotis sukurtas');
+            return redirect()->back()->with('success', 'Užduotis sukurta');
             
         }
     }
@@ -209,7 +216,7 @@ class EventDataController extends Controller
         else if($active !== null)
         {
            
-            $game = Game::findOrFail($request->gameId);
+            $game = Game::findOrFail($request->gameIdp);
             if($game->status === 1)
             {
                 DB::update('update games set status = ? where id = ?',[0, $gameId]);

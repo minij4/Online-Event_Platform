@@ -18,6 +18,7 @@ class Task extends Model
 
     protected $fillable = [
         'gameId',
+        'type',
         'question',
         'answerId',
         'time',
