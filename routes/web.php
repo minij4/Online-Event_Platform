@@ -52,6 +52,7 @@ Route::get('loged/startGame', [EventController::class, 'startGame']);
 
 Route::get('loged/createGame', [EventDataController::class, 'getEvents']);
 Route::get('loged/delete', [EventDataController::class, 'getAllGames']);
+Route::get('loged/edit', [EventDataController::class, 'getAllGames2']);
 Route::get('loged/startGame', [EventDataController::class, 'getGames2']);
 
 
@@ -64,5 +65,12 @@ Route::post('deleteEvent', [EventDataController::class, 'deleteEvent'])->name('e
 Route::post('deleteGame', [EventDataController::class, 'deleteGame'])->name('game.delete');
 Route::post('deleteTask', [EventDataController::class, 'deleteTask'])->name('task.delete');
 
+Route::post('editEvent', [EventDataController::class, 'editEvent'])->name('event.edit');
+Route::post('editGame', [EventDataController::class, 'editGame'])->name('game.edit');
+Route::post('editTask', [EventDataController::class, 'editTask'])->name('task.edit');
 
+
+Route::post('updateEvent', [EventDataController::class, 'updateEvent'])->name('event.update');
+Route::post('updateGame', [EventDataController::class, 'updateGame'])->name('game.update');
+Route::post('updateTask1', [EventDataController::class, 'updateTask'])->name('task.update');
 /// Play

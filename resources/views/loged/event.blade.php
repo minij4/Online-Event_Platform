@@ -19,7 +19,10 @@
             <a class="nav-link" href="/loged/createTask">Sukurti Užduotį</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/loged/delete">Ištrinti Užduotis</a>
+            <a class="nav-link" href="/loged/edit">Redaguoti</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/loged/delete">Ištrinti</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/loged/startGame">Paleisti Žaidimą</a>

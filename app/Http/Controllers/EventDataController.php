@@ -179,12 +179,40 @@ class EventDataController extends Controller
 
         return view('/loged/delete', ['events'=>$events, 'games'=>$games, 'tasks'=>$tasks]);
     }
+    public function getAllGames2()
+    {
+        // $data = DB::table('events')
+        //     ->select('events.eventName', 'games.gameName', 'tasks.question', 'tasks.id')
+        //     ->join('games', 'games.eventId', '=', 'events.id')
+        //     ->join('tasks', 'tasks.gameId', '=', 'games.id')
+        //     ->get();
+
+        $events = Event::where('userId','=', self::getUser())->get();
+        $tasks = Task::all();
+
+
+        $games = DB::table('games')
+        ->join('events', 'events.id', 'games.eventId')
+        ->where('events.userId', '=', self::getUser())
+        ->select('games.id', 'games.gameName')
+        ->get();
+
+        $tasks = DB::table('tasks')
+        ->join('games', 'tasks.gameId', 'games.id')
+        ->join('events', 'events.id', 'games.eventId')
+        ->where('events.userId', '=', self::getUser())
+        ->select('tasks.id', 'tasks.question')
+        ->get();
+
+
+        return view('/loged/edit', ['events'=>$events, 'games'=>$games, 'tasks'=>$tasks]);
+    }
 
 
     public function deleteEvent(Request $request)
     {  
         $event = Event::findOrFail($request->event);
-
+        
         if($event->delete()){
             return redirect()->back()->with('success', 'Renginys ištrintas');
         }
@@ -227,5 +255,116 @@ class EventDataController extends Controller
                 return redirect()->back()->with('error', 'Vienu metu gali būti paleistas tik vienas žaidimas');
             }
         } 
-    }  
+    }
+
+    public function editEvent(Request $request)
+    {
+        $eventID = $request->event;
+        $event = Event::findOrFail($eventID);
+
+        if(Auth::check()){
+            return view('loged/editEvent', ['event'=>$event]);
+        }
+  
+        return  redirect()->route('login')->with('error', 'You are not loged in!');
+    }
+    public function editGame(Request $request)
+    {
+        $gameID = $request->game;
+        $game = Game::findOrFail($gameID);
+
+        if(Auth::check()){
+            return view('loged/editGame', ['game'=>$game]);
+        }
+  
+        return  redirect()->route('login')->with('error', 'You are not loged in!');
+    }
+    public function editTask(Request $request)
+    {
+        $taskID = $request->task;
+        $task = Task::findOrFail($taskID);
+        $taskQuestion = $task->question;
+        $taskTime = $task->time;
+        $taskFile = $task->url;
+
+        $data = DB::table('tasks')
+        ->join('answers', 'answers.taskId', 'tasks.id')
+        ->where('tasks.id', '=', $taskID)
+        ->select('answers.id', 'answers.answer')
+        ->get();
+
+
+        if(Auth::check()){
+            if($task->type == 1 || $task->type == 2 || $task->type == 3)
+            {
+                return view('loged/editTask1', ['data'=>$data, 'taskId'=>$taskID, 'question'=>$taskQuestion]);
+            }
+            if($task->type == 4 || $task->type == 5 || $task->type == 6)
+            {
+                return view('loged/editTask2', ['data'=>$data, 'taskId'=>$taskID, 'question'=>$taskQuestion, 'time'=>$taskTime]);
+            }
+            
+                
+        }
+  
+        return  redirect()->route('login')->with('error', 'You are not loged in!');
+    }
+
+    public function updateEvent(Request $request)
+    {
+        $chk = DB::update('update events set eventName = ? where id = ?',[$request->eventName,$request->eventId]);
+        
+        if($chk){
+            return redirect('loged/edit')->with('success', 'Naujas renginio pavadinimas išsaugotas');
+        }
+    }
+    public function updateGame(Request $request)
+    {
+        $chk = DB::update('update games set gameName = ? where id = ?',[$request->gameName,$request->gameId]);
+        
+        if($chk){
+            return redirect('loged/edit')->with('success', 'Naujas žaidimo pavadinimas išsaugotas');
+        }
+    }
+    public function updateTask(Request $request)
+    {
+        $taskID = $request->taskId;
+
+        $data = DB::table('tasks')
+        ->join('answers', 'answers.taskId', 'tasks.id')
+        ->where('tasks.id', '=', $taskID)
+        ->select('answers.id', 'answers.answer')
+        ->get();
+        if($request->time){
+            $taskTime = $request->time;
+        }
+        
+        $answerId = $request->answerId;
+
+        if ($request->hasFile('file')) {
+            $path = $request->file('file')->store(
+                'photos', 'public'
+            );
+            $taskUrl = $path;
+        }else {
+            $taskUrl = '/';
+        }
+        $data = json_decode($data, true);
+        
+        
+        DB::update('update tasks set question = ?,  answerId = ?, url = ? where id = ?',[$request->question, $answerId, $taskUrl, $taskID]);
+        DB::update('update answers set answer = ? where id = ?' , [$request->answerInput1, $data[0]['id']]);
+        DB::update('update answers set answer = ? where id = ?' , [$request->answerInput2, $data[1]['id']]);
+        DB::update('update answers set answer = ? where id = ?' , [$request->answerInput3, $data[2]['id']]);
+        DB::update('update answers set answer = ? where id = ?' , [$request->answerInput4, $data[3]['id']]);
+        DB::update('update tasks set answerId = ? where id = ?' , [$answerId, $taskID]);
+
+        return redirect('loged/edit')->with('success', 'Užduotis išsaugota');
+    }
+   
+    // updating temp. id
+    
+
+
+
 }
