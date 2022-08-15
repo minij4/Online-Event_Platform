@@ -21,6 +21,7 @@ class Event extends Model
     protected $fillable = [
         'userId',
         'eventName',
+        'stages',
     ];
 }
 

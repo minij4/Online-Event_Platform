@@ -6,30 +6,30 @@
     <h4>Pasirinkite užduotį</h4>
     <ul class="nav">
         <li class="nav-item sq">
-            <a class="nav-link square" href="tasks/photoBlur">Blur Nuotrauka</a>
+            <a class="nav-link square" href="tasks/photoBlur/1">Blur Nuotrauka</a>
         </li>
         <li class="nav-item sq">
-            <a class="nav-link square" href="tasks/photoMosaic">Nuotraukos Mozaika</a>
+            <a class="nav-link square" href="tasks/photoMosaic/2">Nuotraukos Mozaika</a>
         </li>
         <li class="nav-item sq">
-            <a class="nav-link square" href="tasks/photo">Nuotrauka</a>
+            <a class="nav-link square" href="tasks/photo/3">Nuotrauka</a>
         </li>
        
     </ul>
     <ul class="nav">
         <li class="nav-item sq">
-            <a class="nav-link square" href="tasks/videoBlur">Blur Video</a>
+            <a class="nav-link square" href="tasks/videoBlur/4">Blur Video</a>
         </li>
         <li class="nav-item sq">
-            <a class="nav-link square" href="tasks/video">Video</a>
+            <a class="nav-link square" href="tasks/video/5">Video</a>
         </li>
         <li class="nav-item sq">
-            <a class="nav-link square" href="tasks/audio">Audio</a>
+            <a class="nav-link square" href="tasks/audio/6">Audio</a>
         </li>
     </ul>
 
 
-    <canvas id="canvas" style="width:250px; height:250px;"></canvas>
+    <!-- <canvas id="canvas" style="height:250px; "></canvas> -->
     <script>
         const PUZZLE_HOVER_TINT = '#009900';
  
@@ -51,7 +51,7 @@
  
  
  img.addEventListener('load',onImage,false);
- img.src = "https://www.vle.lt/uploads/_CGSmartImage/9982_1-c1986c73967ec6478b652214a07f404b.jpg";
+ img.src = "https://upload.wikimedia.org/wikipedia/commons/9/9a/Antanas_Smetona_2.jpg";
  
  function onImage(e) {
      pieceWidth = Math.floor(img.width / difficulty);

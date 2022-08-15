@@ -30,8 +30,6 @@ class LoginController extends Controller
             return view('loged/home');
         }
         else
-        {
-
             return redirect()->route('login')->with('error','Klaidingas elektroninis paštas arba slaptažodis.');
         }
     }

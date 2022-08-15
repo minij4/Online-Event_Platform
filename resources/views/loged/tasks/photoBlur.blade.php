@@ -23,6 +23,12 @@
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
                     {!! \Session::get('success') !!}
                 </div>
+        @endif
+        @if (\Session::has('error'))
+                <div class="alert alert-denger alert-dismissible fade show">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    {!! \Session::get('success') !!}
+                </div>
         @endif 
 
         <form method="POST" action="{{ route('task.post', ['taskType' => $taskType]) }}" enctype="multipart/form-data">

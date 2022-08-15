@@ -27,6 +27,7 @@ class Game extends Model
     protected $fillable = [
         'eventId',
         'gameName',
+        'stage',
         'status',
     ];
 }

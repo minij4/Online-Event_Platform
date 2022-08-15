@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('userId');
             $table->string('eventName')->unique();
+            $table->integer('stages');
             $table->foreign('userId')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });

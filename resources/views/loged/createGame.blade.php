@@ -27,6 +27,14 @@
                             @endforeach
                         </select>           
                     </div>
+                    <div class="col">
+                        @foreach ($data as $row)
+                        <div class="stages" id="{{ $row->id }}" style="display: none">
+                            <p>Žaidimas priskiriamas etapui</p>
+                            <input class="form-control" type="number" name="{{ $row->id }}" min="1" max="{{ $row->stages }}">
+                        </div>
+                        @endforeach
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col">
@@ -35,4 +43,16 @@
                 </div> 
             </form>
     </div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".stages:first").css("display", "block");
+    });
+    $('#eventName').on('change', function()
+    {
+        $(".stages").css("display", "none");
+        var id = $(this).find('option:selected').val();
+        $("#" + id).css("display", "block");
+    }); 
+</script>
 @endsection

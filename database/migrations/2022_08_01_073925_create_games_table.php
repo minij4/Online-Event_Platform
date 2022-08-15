@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('eventId');
             $table->string('gameName')->unique();
+            $table->integer('stage');
             $table->integer('status')->default(0);
             $table->foreign('eventId')->references('id')->on('events')->onDelete('cascade');
             $table->timestamps();
