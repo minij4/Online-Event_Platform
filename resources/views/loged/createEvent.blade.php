@@ -11,18 +11,16 @@
             </div>
             @endif  
         
-        <p>Renginio pavadinimas</p>  
         <form method="POST" action="{{ route('event.post') }}" >
             @csrf
             <div class="row">
                 <div class="col-sm-4">
-                    <input type="text" id="eventName" class="form-control" placeholder="" name="eventName">
+                    <input type="text" id="eventName" class="form-control" placeholder="Renginio pavadinimas" name="eventName">
                 </div>
-                <p>Etapai:</p>
+                <div class="col-sm-1 mr-5">
+                    <input class="form-control" style="width:100px;" type="number" id="stages" placeholder="etapai" name="stages" min="1" max="10">
+                </div>
                 <div class="col-sm-1">
-                    <input class="form-control" type="number" id="stages" name="stages" min="1" max="10">
-                </div>
-                <div class="col-sm-4">
                     <button type="submit" class="btn btn-dark ">Sukurti</button>
                 </div>
             </div>
