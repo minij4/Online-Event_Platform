@@ -31,14 +31,7 @@ class EventController extends Controller
   
         return  redirect()->route('login')->with('error', 'You are not loged in!');
     }
-    public function createStage()
-    {
-        if(Auth::check()){
-            return view('loged/createStage');
-        }
-  
-        return  redirect()->route('login')->with('error', 'You are not loged in!');
-    }
+    
     public function createGame()
     {
         if(Auth::check()){

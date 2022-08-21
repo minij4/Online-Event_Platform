@@ -9,7 +9,7 @@
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
                 {!! \Session::get('success') !!}
             </div>
-            @endif  
+        @endif  
         
         <form method="POST" action="{{ route('event.post') }}" >
             @csrf

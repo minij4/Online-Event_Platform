@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>@yield('title')</title>
+        <title>Waiting Room</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -20,17 +20,15 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
     </head>
     <body class="antialiased" style="overflow: hidden;">
-   
-        <div class="topnav">
-            <a href="/">Pagrindinis</a>
-            <a href="/game">Prisijungti į žaidimą</a>
-            <a href="/registration" class="split">Registruotis</a>
-            <a href="/login" class="split">Prisijungti</a>
-        </div>
         <div class="relative flex items-top min-h-screen py-4 sm:pt-0">
-            @yield('content')
-        </div>
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="text-center">
+                    <h1 class="display-3 fw-bolder">Prisijungėte kaip : {{ Session::get('nickname') }} </h1>
+                    <p style="font-size:2rem" class="lead fw-normal mb-0 ">laukiama, kol žaidimas prasidės</p>
+                    <a href="/sessionDelete" class="btn btn-dark" style="color:white !important;">Atsijungti</a>
 
-        @yield('scripts')
+                </div>
+            </div>
+        </div>
     </body>
 </html>
