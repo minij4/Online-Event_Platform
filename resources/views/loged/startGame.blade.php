@@ -26,7 +26,7 @@
                         @foreach ($data as $row) 
                         {
                             <option value="{{ $row->id }}">
-                                {{ $row->eventName . ' — ' . $row->stage . ' - ' . $row->gameName }}  
+                                {{ $row->eventName . ' — ' . $row->stage . ' etapas ' }}  
                                 {{ $row->status === 1 ? "| aktyvus" : ""  }}
                             </option>
                         }

@@ -9,7 +9,7 @@ class EventController extends Controller
 {
     public function home()
     {
-        if(Auth::check()){
+        if(Auth::user()){
             return view('loged/home');
         }
   
@@ -17,7 +17,7 @@ class EventController extends Controller
     }
     public function event()
     {
-        if(Auth::check()){
+        if(Auth::user()){
             return view('loged/event');
         }
   
@@ -25,7 +25,7 @@ class EventController extends Controller
     }
     public function createEvent()
     {
-        if(Auth::check()){
+        if(Auth::user()){
             return view('loged/createEvent');
         }
   
@@ -34,7 +34,7 @@ class EventController extends Controller
     
     public function createGame()
     {
-        if(Auth::check()){
+        if(Auth::user()){
             return view('loged/createGame');
         }
   
@@ -42,15 +42,24 @@ class EventController extends Controller
     }
     public function createTask()
     {
-        if(Auth::check()){
+        if(Auth::user()){
             return view('loged/createTask');
+        }
+  
+        return  redirect()->route('login')->with('error', 'You are not loged in!');
+    }
+
+    public function edit()
+    {
+        if(Auth::user()){
+            return view('loged/edit');
         }
   
         return  redirect()->route('login')->with('error', 'You are not loged in!');
     }
     public function delete()
     {
-        if(Auth::check()){
+        if(Auth::user()){
             return view('loged/delete');
         }
   
@@ -59,7 +68,7 @@ class EventController extends Controller
 
     public function startGame()
     {
-        if(Auth::check()){
+        if(Auth::user()){
             return view('loged/startGame');
         }
   
@@ -67,10 +76,18 @@ class EventController extends Controller
     }
 
     ///
+
+    public function task($taskName = null, $taskType = null)
+    {
+        if(Auth::user()){
+            return view('/loged/tasks/' . $taskName)->with('taskType', $taskType);
+        }
+        return  redirect()->route('login')->with('error', 'You are not loged in!');
+    }
     
     public function photoBlur()
     {
-        if(Auth::check()){
+        if(Auth::user()){
             return view('loged/tasks/photoBlur');
         }
   
@@ -78,7 +95,7 @@ class EventController extends Controller
     }
     public function photoMosaic()
     {
-        if(Auth::check()){
+        if(Auth::user()){
             return view('loged/tasks/photoMosaic');
         }
   
@@ -86,7 +103,7 @@ class EventController extends Controller
     }
     public function photo()
     {
-        if(Auth::check()){
+        if(Auth::user()){
             return view('loged/tasks/photo');
         }
   
@@ -94,7 +111,7 @@ class EventController extends Controller
     }
     public function videoBlur()
     {
-        if(Auth::check()){
+        if(Auth::user()){
             return view('loged/tasks/videoBlur');
         }
   
@@ -102,7 +119,7 @@ class EventController extends Controller
     }
     public function video()
     {
-        if(Auth::check()){
+        if(Auth::user()){
             return view('loged/tasks/video');
         }
   
@@ -110,7 +127,7 @@ class EventController extends Controller
     }
     public function audio()
     {
-        if(Auth::check()){
+        if(Auth::user()){
             return view('loged/tasks/audio');
         }
   

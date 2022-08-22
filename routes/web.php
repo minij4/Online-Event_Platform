@@ -66,21 +66,20 @@ Route::get('loged/home', [EventController::class, 'home']);
 /// menu
 Route::get('loged/createEvent', [EventController::class, 'createEvent']);
 Route::get('loged/createStage', [EventController::class, 'createStage']);
-Route::get('loged/createGame', [EventController::class, 'createGame']);
 Route::get('loged/createTask', [EventController::class, 'createTask']);
 
 
-Route::get('loged/delete', [EventController::class, 'delete']);
 Route::get('loged/startGame', [EventController::class, 'startGame']);
 
 
-Route::get('loged/tasks/{taskName?}/{taskType?}', [GetDataController::class, 'getGames']);
+
 
 /// tasks
 // Event data
 Route::get('loged/createGame', [GetDataController::class, 'getEvents']);
 Route::get('loged/delete', [GetDataController::class, 'getAllGames']);
 Route::get('loged/edit', [GetDataController::class, 'getAllGames2']);
+Route::get('loged/tasks/{taskName?}/{taskType?}', [GetDataController::class, 'getGames']);
 Route::get('loged/startGame', [GetDataController::class, 'getGames2']);
 
 

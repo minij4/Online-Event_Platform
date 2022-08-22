@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\Event;
 use App\Models\Game;
@@ -13,7 +14,8 @@ class GetDataController extends Controller
 {
     public function getUser()
     {
-        return auth()->user()->id;
+        return Auth::id();
+        //$email = Auth::user()->email;
     }
     public function getEvents()
     {
@@ -36,12 +38,20 @@ class GetDataController extends Controller
         $data = DB::table('games')
         ->join('events', 'events.id', 'games.eventId')
         ->where('events.userId', '=', self::getUser())
-        ->select('events.userId', 'events.id' , 'events.eventName','games.stage', 'games.id', 'games.gameName', 'games.status')
+        ->select('events.userId', 'events.id as eventId' , 'events.eventName','games.stage', 'games.id', 'games.gameName', 'games.status')
         ->orderBy('events.id')
         ->orderBy('games.stage')
+        ->groupBy('events.id')
         ->get();
+        
+        
+        // ->
+
+
+        // reikia atrinkti pagal etapus ir eventId;;;;;;;;;;;;;
 
         return view('/loged/startGame', ['data'=>$data]);
+        //return $data;
     }
     public function getAllGames()
     {
@@ -80,7 +90,7 @@ class GetDataController extends Controller
         //     ->get();
 
         $events = Event::where('userId','=', self::getUser())->get();
-        $tasks = Task::all();
+        //$tasks = Task::all();
 
 
         $games = DB::table('games')
