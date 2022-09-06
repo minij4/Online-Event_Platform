@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>Waiting Room</title>
 
@@ -16,6 +17,7 @@
         <link rel="stylesheet" href="{{ url('css/styles.css') }}">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+        
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
     </head>
@@ -27,8 +29,14 @@
                     <p style="font-size:2rem" class="lead fw-normal mb-0 ">laukiama, kol žaidimas prasidės</p>
                     <a href="/sessionDelete" class="btn btn-dark" style="color:white !important;">Atsijungti</a>
 
+                    <div id="txtHint"></div>
+
                 </div>
             </div>
         </div>
+        <div id="app">
+            
+        </div>
+        @vite(['resources/js/app.js'])
     </body>
 </html>

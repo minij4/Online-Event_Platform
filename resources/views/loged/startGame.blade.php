@@ -36,7 +36,10 @@
             </div>
             <div class="col">
                 <button type="submit" class="btn btn-dark">paleisti / sustabdyti</button>
-            </div           
+            </div>         
         </div>
     </form>
 @endsection
+
+
+

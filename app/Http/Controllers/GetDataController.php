@@ -19,6 +19,7 @@ class GetDataController extends Controller
     }
     public function getEvents()
     {
+        
         $data = Event::where('userId','=',self::getUser())->get();
         
         return view('/loged/createGame', ['data'=>$data]);
@@ -42,6 +43,7 @@ class GetDataController extends Controller
         ->orderBy('events.id')
         ->orderBy('games.stage')
         ->groupBy('events.id')
+        ->groupBy('games.stage')
         ->get();
         
         

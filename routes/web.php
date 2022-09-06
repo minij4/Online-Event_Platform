@@ -31,7 +31,7 @@ use App\Http\Controllers\GameController;
 
 Route::get('/', function () {
     if(Session::get('nickname')) {
-        return view('waitingRoom');
+        return redirect('waitingRoom');
     }
     return view('welcome');
 });
@@ -50,7 +50,7 @@ Route::get('/logout',[LoginController::class, 'signout']);
 /// Play
 Route::get('sessionDelete', [GameController::class, 'sessionDelete']);
 Route::get('game', [GameController::class, 'game']);
-Route::get('waitingRoom', [GameController::class, 'waitingRoom']);
+
 
 Route::post('postPlayer', [GameController::class, 'postPlayer'])->name('player.post');
 
@@ -88,8 +88,12 @@ Route::post('postEvent', [PostDataController::class, 'postEvent'])->name('event.
 Route::post('postGame', [PostDataController::class, 'postGame'])->name('game.post');
 Route::post('postTask', [PostDataController::class, 'postTask'])->name('task.post');
 
+///////////////////////////////////////////////////////////////////////////////////////////
+// listens event
+Route::get('waitingRoom', [GameController::class, 'waitingRoom']);
+// fire event
 Route::post('startGame', [StartGameController::class, 'startGame'])->name('start.post');
-
+///////////////////////////////////////////////////////////////////////////////////////////
 
 // DELETE EVENT DATA
 Route::post('deleteEvent', [DeleteDataController::class, 'deleteEvent'])->name('event.delete');
@@ -105,4 +109,9 @@ Route::post('editTask', [EditDataController::class, 'editTask'])->name('task.edi
 Route::post('updateEvent', [UpdateDataController::class, 'updateEvent'])->name('event.update');
 Route::post('updateGame', [UpdateDataController::class, 'updateGame'])->name('game.update');
 Route::post('updateTask1', [UpdateDataController::class, 'updateTask'])->name('task.update');
+
+
+
+
+
 

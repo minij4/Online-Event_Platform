@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('games', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('eventId');
+            // $table->string('gameName')->unique();
             $table->string('gameName')->unique();
             $table->integer('stage');
             $table->integer('status')->default(0);

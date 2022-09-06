@@ -6,12 +6,15 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 
+use App\Models\Game;
+use App\Events\CheckStatus;
 
 class GameController extends Controller
 {
     public function waitingRoom()
     {
         if(Session::get('nickname')) {
+
             return view('/waitingRoom');
         }
     }
