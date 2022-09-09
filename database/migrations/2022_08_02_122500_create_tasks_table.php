@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('answerId');
             $table->time('time')->default(0);
             $table->string('url')->default('/');
+            $table->integer('status')->default(0);
             $table->foreign('gameId')->references('id')->on('games')->onDelete('cascade');
             $table->timestamps();
         });

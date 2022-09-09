@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use App\Models\Game;
+use App\Models\Task;
 use App\Events\CheckStatus;
 use Illuminate\Http\Request;
 
@@ -40,6 +41,7 @@ class StartGameController extends Controller
             {
                 //DB::update('update games set status = ? where eventId = ? AND stage = ?',[0, $eventId, $stage]);
                 Game::where(['eventId'=>$eventId,'stage'=>$stage])->update(['status'=>0]);
+                DB::update('update tasks set status = ? where status = ?' , [0, 1]);
                 return redirect()->back()->with('success', 'Žaidimas sustabdytas');
             }
             else

@@ -54,6 +54,8 @@ Route::get('game', [GameController::class, 'game']);
 
 Route::post('postPlayer', [GameController::class, 'postPlayer'])->name('player.post');
 
+Route::get('task', [GameController::class, 'task']);
+Route::get('loadGame', [GameController::class, 'loadGame']);
 
 
 
@@ -108,7 +110,8 @@ Route::post('editTask', [EditDataController::class, 'editTask'])->name('task.edi
 // UPDATE EVENT DATA
 Route::post('updateEvent', [UpdateDataController::class, 'updateEvent'])->name('event.update');
 Route::post('updateGame', [UpdateDataController::class, 'updateGame'])->name('game.update');
-Route::post('updateTask1', [UpdateDataController::class, 'updateTask'])->name('task.update');
+Route::post('updateTask', [UpdateDataController::class, 'updateTask'])->name('task.update');
+
 
 
 

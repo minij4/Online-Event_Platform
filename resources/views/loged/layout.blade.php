@@ -23,15 +23,14 @@
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
     </head>
-    <body class="antialiased" style="overflow: hidden;">
-   
-        <div class="topnav">
+    <body>
+        <div class="topnav navigation">
             <a href="/loged/home">Pagrindinis</a>
             <a href="/loged/createEvent">Sukurti renginį</a>
             <a href="/loged/startGame">Paleisti žaidimą</a>
             <a href="/logout" class="split">Atsijungti</a>
         </div>
-        <div class="relative flex items-top min-h-screen py-4 sm:pt-0">
+        <div class="relative flex items-top py-4 sm:pt-0">
             @yield('content')
         </div>
 

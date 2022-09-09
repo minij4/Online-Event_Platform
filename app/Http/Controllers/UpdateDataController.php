@@ -44,6 +44,7 @@ class UpdateDataController extends Controller
             );
             DB::update('update tasks set url = ? where id = ?' , [$path, $taskID]);
         }
+
         $data = json_decode($data, true);
         
         

@@ -31,12 +31,14 @@
 
     <!-- <canvas id="canvas" style="height:250px; "></canvas> -->
     <script>
-        const PUZZLE_HOVER_TINT = '#009900';
+
+const PUZZLE_HOVER_TINT = '#009900';
  
  
  const canvas = document.querySelector("#canvas");
  const stage = canvas.getContext("2d");
  const img = new Image();
+
   
  let difficulty = 5;
  let pieces;

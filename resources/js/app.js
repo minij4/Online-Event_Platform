@@ -31,11 +31,11 @@ const app = createApp({
     created() {
         window.Echo.channel('status')
             .listen('CheckStatus', (e) => {
-                alert("Welp this showed up without a refresh");
-                console.log('Event listen CommentSent');
+                //alert("Welp this showed up without a refresh");
+                //console.log('Event listen CommentSent');
 
                 // žaidimo pradžia
-                window.location.href = "/waitingRoom";
+                window.location.href = "/loadGame";
         });
     }
 });

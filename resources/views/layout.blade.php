@@ -19,15 +19,14 @@
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
     </head>
-    <body class="antialiased" style="overflow: hidden;">
-   
-        <div class="topnav">
+    <body>
+        <div class="topnav navigation">
             <a href="/">Pagrindinis</a>
             <a href="/game">Prisijungti į žaidimą</a>
             <a href="/registration" class="split">Registruotis</a>
             <a href="/login" class="split">Prisijungti</a>
         </div>
-        <div class="relative flex items-top min-h-screen py-4 sm:pt-0">
+        <div class="relative flex items-top pt-5 sm:pt-0">
             @yield('content')
         </div>
 
