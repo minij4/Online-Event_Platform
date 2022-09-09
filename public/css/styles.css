@@ -6,6 +6,7 @@ a {
 html {
   margin: 0;
   height: 100%;
+  background-color:#786DB1;
 }
 body {
     font-family: 'Nunito', sans-serif;
@@ -114,21 +115,24 @@ img {
 
 
 @media only screen and (min-width: 770px) {
-  body {
-    height: max-content;
-  }
   .box {
     display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-between;
     align-items: flex-start;
+    justify-content: space-between;
+    flex-direction:row-reverse;
     gap: 200px;
+  }
+  .image {
+    width: 65%;
   }
   #image {
     width: 65%;
   }
   #canvas {
     width: 65%;
+  }
+  .welcome {
+    padding-top:50px;
   }
 }
 @media only screen and (max-width: 770px) {
@@ -154,5 +158,11 @@ img {
   #canvas {
     height: 100%;
     
+  }
+  .topnav a.split {
+    float: left;
+  }
+  .topnav a {
+    width: 100%;
   }
 }

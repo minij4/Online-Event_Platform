@@ -26,7 +26,7 @@
             <a href="/registration" class="split">Registruotis</a>
             <a href="/login" class="split">Prisijungti</a>
         </div>
-        <div class="relative flex items-top pt-5 sm:pt-0">
+        <div class="relative flex items-top sm:pt-0 welcome">
             @yield('content')
         </div>
 

@@ -28,18 +28,12 @@
     <body>
    
         <div class="container main">
-                @if (session('error'))
-                <div class="alert alert-danger alert-dismissible">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    {{ session('error') }}
-                </div>
-                @endif
                 <div class="content">
-                    <div class="pb-1"><h1>{{ $game->gameName }}</h1></div>
-                    <div class="pb-4"><h2>{{ $task->question }}</h2></div>
+                    <div class="pb-1"><h1  style="margin-top: 0px;">{{ $game->gameName }}</h1></div>
+                    <div class="pb-2"><h2>{{ $task->question }}</h2></div>
                     
                     <div class="box">
-                        <div class="pb-4 image">
+                        <div class="image pb-2">
                             <canvas id="canvas"></canvas>
                             <img  id="image" src="{{ asset($task->url) }}">
                         </div>
@@ -53,9 +47,6 @@
                             @endforeach
                         </div>
                     </div>
-                    
-                    
-
                 </div>
             </div>
         </div>

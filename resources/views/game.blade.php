@@ -11,11 +11,11 @@
           {{ session('error') }}
       </div>
     @endif
-    <form method="POST" action="{{ route('player.post') }}" >
+    <form method="POST" action="{{ route('player.post') }}">
         @csrf
         <div class="row">
-            <div class="col-sm-4">
-                <input type="text" id="nickname" class="form-control" placeholder="Dalyvio vardas" name="nickname">
+            <div class="col-sm-4 pb-4">
+                <input type="text" id="nickname" class="form-control" placeholder="Dalyvio vardas" name="nickname" autocomplete="off">
             </div>
             <div class="col-sm-1">
                 <button type="submit" class="btn btn-dark ">Prisijungti</button>
