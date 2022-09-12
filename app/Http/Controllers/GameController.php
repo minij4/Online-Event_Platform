@@ -30,44 +30,71 @@ class GameController extends Controller
         }
         return view('/game');
     }
-    public function loadGame()
+    public function loadGame(Request $request)
     { 
         if(Session::get('nickname')) {
             if(Game::where('status','=', 1)->first()) {
                 $game = Game::where('status','=', 1)->first();
                 $gameId = $game->id;
-    
+
+                if(Session::get('gameId')) {
+                    $request->session()->forget('gameId');
+                } 
+                session()->put('gameId', $gameId);
+
                 DB::update('update tasks set status = ? where gameId = ?' , [1, $gameId]);
-    
+
+                $tasks = Task::where('status', 1)->get();
+                $tasks = collect($tasks);
                 
+                session()->put('tasks', $tasks);
+
                 return redirect('task');
             }
         }
         /// Kodas po etapo
         ///////////////////
-        return view('/game');
+        return redirect('/waitingRoom');
     }
-    public function task()
+    public function task(Request $request)
     { 
         if(Session::get('nickname')) {
-            $game = Game::where('status','=', 1)->first();
+            $game = Game::where('id','=', Session::get('gameId'))->first();
             $gameId = $game->id;
 
-
-            if(Task::where('status','=', 1)->first())
+            if(Session::get('tasks')->first())
             {
-                $task = Task::where('status','=', 1)->first();
+                $tasks = Session::get('tasks');
+                $task = $tasks->first();
                 $taskId = $task->id;
                 $taskType = $task->type;
 
+                ///
+                $answerId = $task->answerId;
+                $answer = Answer::select('answer')->where('id','=', $answerId)->first();
+
+
                 $answers = Answer::where('taskId','=', $taskId)->get();
 
+                $tasks->shift();
+                
+                $request->session()->forget('tasks');
+                
+                session()->put('tasks', $tasks);
+                
 
-                DB::update('update tasks set status = ? where id = ?' , [0, $taskId]);
-
-                return view('task')->with('game', $game)->with('task', $task)->with('taskType', $taskType)->with('answers', $answers);
+                return view('task')
+                    ->with('game', $game)
+                    ->with('task', $task)
+                    ->with('taskType', $taskType)
+                    ->with('answers', $answers)
+                    ->with('answer', $answer)
+                    ->with('answerId', $answerId);
             } else {
+                // bug
                 DB::update('update games set status = ? where id = ?' , [0, $gameId]);
+                DB::update('update tasks set status = ? where gameId = ?' , [0, $gameId]);
+                $request->session()->forget('tasks');
 
                 return redirect('/loadGame');
             }

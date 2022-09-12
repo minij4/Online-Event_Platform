@@ -37,7 +37,7 @@
                             <canvas id="canvas"></canvas>
                             <img  id="image" src="{{ asset($task->url) }}">
                         </div>
-                        <div class="answers">
+                        <div class="answers" id="answers">
                             @foreach ($answers as $row)
                                 <div class="pb-4 answer">
                                     <button onclick="score(id)" type="button" class="btn btn-light p-4" id="{{ $row->id }}"></button> 
@@ -46,6 +46,7 @@
                                 </div>
                             @endforeach
                         </div>
+                        
                     </div>
                 </div>
             </div>
@@ -62,6 +63,10 @@
 
         <script>    
             var taskType = "{{ $task->type }}";
+           
+           /// tikrinimui
+            var answer = "{{ $answer }}";
+            var answerId = "{{ $answerId }}";
 
             console.log(taskType);
             
@@ -73,12 +78,14 @@
                 img.classList.add("blur");
             }
             
+            /// paspaudus mygtuką
 
             function score(id) {
                 console.log(id);
 
                 const answers = document.getElementById('answers');
                 answers.style.display = "none";
+
                 /// pridėti answers 
 
             }
