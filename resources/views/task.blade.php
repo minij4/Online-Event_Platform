@@ -36,6 +36,16 @@
                         <div class="image pb-2">
                             <canvas id="canvas"></canvas>
                             <img  id="image" src="{{ asset($task->url) }}">
+
+                            <video id="video" autoplay>
+                                <source src="{{ asset($task->url) }}" type="video/mp4" >
+                                Sorry, your browser does not support HTML5 video.
+                            </video>
+
+                            <audio id="audio" controls autoplay>
+                                <source src="{{ asset($task->url) }}" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
                         </div>
                         <div class="answers" id="answers">
                             @foreach ($answers as $row)
@@ -74,10 +84,51 @@
             if( taskType == 1 ) {
                 const canvas = document.getElementById('canvas');
                 canvas.style.display = "none";
+                const audio = document.getElementById('audio');
+                audio.style.display = "none";
+                const video = document.getElementById('video');
+                video.style.display = "none";
                 const img = document.getElementById('image');
                 img.classList.add("blur");
             }
-            
+            if( taskType == 3 ) {
+                const canvas = document.getElementById('canvas');
+                canvas.style.display = "none";
+                const audio = document.getElementById('audio');
+                audio.style.display = "none";
+            }
+            if( taskType == 5 ) {
+                const img = document.getElementById('image');
+                img.style.display = "none";
+                const canvas = document.getElementById('canvas');
+                canvas.style.display = "none";
+                const audio = document.getElementById('audio');
+                audio.style.display = "none";
+                
+
+            }
+            if( taskType == 4 ) {
+                const img = document.getElementById('image');
+                img.style.display = "none";
+                const canvas = document.getElementById('canvas');
+                canvas.style.display = "none";
+                
+                const video = document.getElementById('video');
+                video.classList.add("blur");
+                const audio = document.getElementById('audio');
+                audio.style.display = "none";
+            }
+            if( taskType == 6 ) {
+                const img = document.getElementById('image');
+                img.style.display = "none";
+                const canvas = document.getElementById('canvas');
+                canvas.style.display = "none";
+                const video = document.getElementById('video');
+                video.style.display = "none";
+
+
+
+            }
             /// paspaudus mygtuką
 
             function score(id) {
@@ -132,8 +183,12 @@
 
                     ///// Mosaic function
                     if( taskType == 2 ) {
+                        const audio = document.getElementById('audio');
+                        audio.style.display = "none";
                         const img2 = document.getElementById('image');
                         img2.style.display = "none";
+                        const video = document.getElementById('video');
+                        video.style.display = "none";
 
                         const canvas = document.getElementById('canvas');
                         canvas.style.display = "block";

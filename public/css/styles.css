@@ -111,6 +111,9 @@ button {
 img {
   border-radius: 5%;
 }
+canvas {
+  border-radius: 5%;
+}
 
 
 
@@ -131,6 +134,10 @@ img {
   #canvas {
     width: 65%;
   }
+  #video {
+    width: 65%;
+  }
+
   .welcome {
     padding-top:50px;
   }
@@ -154,6 +161,9 @@ img {
   #image {
     height: 100%;
     
+  }
+  #video {
+    height: 100%;
   }
   #canvas {
     height: 100%;
