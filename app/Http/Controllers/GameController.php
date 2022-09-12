@@ -69,7 +69,6 @@ class GameController extends Controller
                 $taskId = $task->id;
                 $taskType = $task->type;
 
-                ///
                 $answerId = $task->answerId;
                 $answer = Answer::select('answer')->where('id','=', $answerId)->first();
 
@@ -78,7 +77,7 @@ class GameController extends Controller
 
                 $tasks->shift();
                 
-                
+
                 $request->session()->forget('tasks');
                 
                 session()->put('tasks', $tasks);
