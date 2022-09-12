@@ -78,10 +78,11 @@ class GameController extends Controller
 
                 $tasks->shift();
                 
+                
                 $request->session()->forget('tasks');
                 
                 session()->put('tasks', $tasks);
-                
+
 
                 return view('task')
                     ->with('game', $game)
