@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 
 use App\Http\Controllers\EventController;
-
+use App\Http\Controllers\SessionController;
 use App\Http\Controllers\PostDataController;
 use App\Http\Controllers\EditDataController;
 use App\Http\Controllers\GetDataController;
@@ -15,7 +15,8 @@ use App\Http\Controllers\StartGameController;
 
 use App\Http\Controllers\GameController;
 
-
+use Illuminate\Support\Facades\Session;
+use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,6 +36,8 @@ Route::get('/', function () {
     }
     return view('welcome');
 });
+Route::get('setData', [SessionController::class, 'setData'])->name('session.create');
+
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::get('/registration', [LoginController::class, 'registration']);

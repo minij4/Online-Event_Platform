@@ -20,7 +20,8 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3pro.css">
 
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
       
@@ -68,14 +69,13 @@
         @yield('scripts')
     </body>
 </html>
-
-
         <script>
-            document.getElementById('answBox').style.display = "none";
+        document.getElementById('answBox').style.display = "none";
 
             var taskType = "{{ $task->type }}";
+
+            var SCORE =  parseInt("{{ Session::get('score') }}");
            
-           /// tikrinimui
             var answer = "{{ $answer }}";
             
 
@@ -107,9 +107,8 @@
                 canvas.style.display = "none";
                 const audio = document.getElementById('audio');
                 audio.style.display = "none";
-                
-
             }
+
             if( taskType == 4 ) {
                 const img = document.getElementById('image');
                 img.style.display = "none";
@@ -128,21 +127,22 @@
                 canvas.style.display = "none";
                 const video = document.getElementById('video');
                 video.style.display = "none";
-
-
-
             }
-            /// paspaudus mygtuką
+
+            
             var answerId = "{{ $answerId }}";
             var choosen;
+
+            
+
+
+
             function score(id) {
                 console.log(id);
                 choosen = id;
                 const answers = document.getElementById('answers');
                 answers.style.display = "none";
-
-                /// pridėti answers 
-
+               
             }
 
             window.setTimeout(function() {
@@ -150,6 +150,21 @@
                 document.getElementById('answBox').style.display = "block";
                 
                 if(answerId == choosen) {
+                    SCORE = SCORE + 100;
+
+                    $.ajaxSetup({
+                        headers: { 'X-CSRF-Token' : $('meta[name=csrf-token]').attr('content') }
+                    });
+
+                    $.ajax({ 
+                        url: "{{ route('session.create') }}",
+                        data: {'score': SCORE},
+                        type: 'get',
+                        success: function(response){
+                            console.log(response);
+                        }
+                    });
+
                     document.getElementById('comment').innerHTML = "Atsakėte teisingai!";
                 } else {
                     document.getElementById('answ').innerHTML = "{{ $answer }}";
@@ -159,18 +174,6 @@
             window.setTimeout(function() {
                 window.location.href = '/task';
             }, 10000);
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

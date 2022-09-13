@@ -19,7 +19,6 @@ class GameController extends Controller
     public function waitingRoom()
     {
         if(Session::get('nickname')) {
-
             return view('/waitingRoom');
         }
     }
@@ -112,7 +111,7 @@ class GameController extends Controller
     
         if($nickname){
             session()->put('nickname', $nickname);
-            session()->put('score', 1500);
+            session()->put('score', 0);
             return redirect('waitingRoom');
         } else {
             return redirect()->back()->with('error', 'Vardas užimtas');

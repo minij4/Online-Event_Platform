@@ -26,6 +26,7 @@
             <div class="container px-4 px-lg-5 my-5">
                 <div class="text-center">
                     <h1 class="display-3 fw-bolder">Prisijungėte kaip : {{ Session::get('nickname') }} </h1>
+                    <h2 class="display-3 fw-bolder">Jūsų taškai: {{ Session::get('score') }} </h1>
                     <p style="font-size:2rem" class="lead fw-normal mb-0 ">laukiama, kol žaidimas prasidės</p>
                     <a href="/sessionDelete" class="btn btn-dark" style="color:white !important;">Atsijungti</a>
 
