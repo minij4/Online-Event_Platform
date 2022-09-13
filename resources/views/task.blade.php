@@ -57,7 +57,7 @@
                             @endforeach
                         </div>
                         <div id="answBox">
-                            <h3>Teisingas atsakymas: </h3>
+                            <h3 id="comment">Teisingas atsakymas: </h3>
                             <p id="answ"></p>
                         </div>
                     </div>
@@ -77,7 +77,7 @@
            
            /// tikrinimui
             var answer = "{{ $answer }}";
-            var answerId = "{{ $answerId }}";
+            
 
             console.log(taskType);
             
@@ -97,6 +97,8 @@
                 canvas.style.display = "none";
                 const audio = document.getElementById('audio');
                 audio.style.display = "none";
+                const video = document.getElementById('video');
+                video.style.display = "none";
             }
             if( taskType == 5 ) {
                 const img = document.getElementById('image');
@@ -131,10 +133,11 @@
 
             }
             /// paspaudus mygtuką
-
+            var answerId = "{{ $answerId }}";
+            var choosen;
             function score(id) {
                 console.log(id);
-
+                choosen = id;
                 const answers = document.getElementById('answers');
                 answers.style.display = "none";
 
@@ -145,8 +148,12 @@
             window.setTimeout(function() {
                 document.getElementById('answers').style.display = "none";
                 document.getElementById('answBox').style.display = "block";
-                document.getElementById('answ').innerHTML = "{{ $answer }}";
                 
+                if(answerId == choosen) {
+                    document.getElementById('comment').innerHTML = "Atsakėte teisingai!";
+                } else {
+                    document.getElementById('answ').innerHTML = "{{ $answer }}";
+                }
             }, 5000);
 
             window.setTimeout(function() {
