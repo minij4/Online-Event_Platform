@@ -56,7 +56,10 @@
                                 </div>
                             @endforeach
                         </div>
-                        
+                        <div id="answBox">
+                            <h3>Teisingas atsakymas: </h3>
+                            <p id="answ"></p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -67,11 +70,9 @@
 </html>
 
 
+        <script>
+            document.getElementById('answBox').style.display = "none";
 
-
-
-
-        <script>    
             var taskType = "{{ $task->type }}";
            
            /// tikrinimui
@@ -142,8 +143,15 @@
             }
 
             window.setTimeout(function() {
-                window.location.href = '/task';
+                document.getElementById('answers').style.display = "none";
+                document.getElementById('answBox').style.display = "block";
+                document.getElementById('answ').innerHTML = "{{ $answer }}";
+                
             }, 5000);
+
+            window.setTimeout(function() {
+                window.location.href = '/task';
+            }, 10000);
 
 
 

@@ -70,13 +70,14 @@ class GameController extends Controller
                 $taskType = $task->type;
 
                 $answerId = $task->answerId;
-                $answer = Answer::select('answer')->where('id','=', $answerId)->first();
+                $Answer = Answer::where('id','=', $answerId)->first();
 
+                $answer = $Answer->answer;
 
                 $answers = Answer::where('taskId','=', $taskId)->get();
 
                 $tasks->shift();
-                
+               
 
                 $request->session()->forget('tasks');
                 
@@ -90,8 +91,8 @@ class GameController extends Controller
                     ->with('answers', $answers)
                     ->with('answer', $answer)
                     ->with('answerId', $answerId);
+
             } else {
-                // bug
                 DB::update('update games set status = ? where id = ?' , [0, $gameId]);
                 DB::update('update tasks set status = ? where gameId = ?' , [0, $gameId]);
                 $request->session()->forget('tasks');
