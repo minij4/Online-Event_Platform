@@ -27,7 +27,9 @@
       
     </head>
     <body>
-   
+    <div class="topnav navigation">
+        <a href="/" class="noPad"><img id="logo" src="{{ asset('/logo.png') }}"></a>
+    </div>
         <div class="container main">
                 <div class="content">
                     <div class="pb-1"><h1  style="margin-top: 0px;">{{ $game->gameName }}</h1></div>

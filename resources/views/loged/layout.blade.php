@@ -25,12 +25,12 @@
     </head>
     <body>
         <div class="topnav navigation">
-            <a href="/loged/home">Pagrindinis</a>
-            <a href="/loged/createEvent">Sukurti renginį</a>
-            <a href="/loged/startGame">Paleisti žaidimą</a>
-            <a href="/logout" class="split">Atsijungti</a>
+            <a href="/loged/home" class="noPad"><img id="logo" src="{{ asset('/logo.png') }}"></a>
+            <a href="/loged/createEvent">sukurti renginį</a>
+            <a href="/loged/startGame">paleisti žaidimą</a>
+            <a href="/logout" class="split">atsijungti</a>
         </div>
-        <div class="relative flex items-top py-4 sm:pt-0">
+        <div class="relative flex items-top py-4 sm:pt-0 content">
             @yield('content')
         </div>
 

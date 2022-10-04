@@ -21,13 +21,21 @@
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
     </head>
+    <div class="topnav navigation">
+        <a href="/" class="noPad"><img id="logo" src="{{ asset('/logo.png') }}"></a>
+    </div>
     <body class="antialiased" style="overflow: hidden;">
         <div class="relative flex items-top min-h-screen py-4 sm:pt-0">
             <div class="container px-4 px-lg-5 my-5">
                 <div class="text-center">
-                    <h1 class="display-3 fw-bolder">Prisijungėte kaip : {{ Session::get('nickname') }} </h1>
-                    <h2 class="display-3 fw-bolder">Jūsų taškai: {{ Session::get('score') }} </h1>
-                    <p style="font-size:2rem" class="lead fw-normal mb-0 ">laukiama, kol žaidimas prasidės</p>
+                    
+                    <h1 class="display-3 fw-bolder nick">{{ Session::get('nickname') }} </h1>
+                    <h2 class="display-3 fw-bolder score">Jūsų taškai: {{ Session::get('score') }} </h1>
+                    <p style="font-size:2rem" class="lead fw-normal mb-0 comment">laukiama, kol žaidimas prasidės</p>
+
+
+
+                    <!-- SCORES -->
                     <a href="/sessionDelete" class="btn btn-dark" style="color:white !important;">Atsijungti</a>
 
                     <div id="txtHint"></div>

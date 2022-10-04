@@ -30,7 +30,7 @@
     </ul>
 
     <!-- Tab panes -->
-    <div class="tab-content pt-4">
+    <div class="tab-content pt-4 content">
         @yield('content1')
     </div>
 

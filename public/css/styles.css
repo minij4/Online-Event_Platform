@@ -5,31 +5,45 @@ a {
 }
 html {
   margin: 0;
-  height: 100%;
-  background-color:#786DB1;
+  color: #df83b5;
+  height:100%;
 }
 body {
-    font-family: 'Nunito', sans-serif;
+    
     margin: 0;
     height: 100%;
     background: rgb(120,109,177);
-    background: linear-gradient(130deg, rgba(120,109,177,1) 0%, rgba(229,206,211,1) 40%, rgba(244,159,196,1) 58%, rgba(120,109,177,1) 100%); 
-    
+    background: url('../Fonai-03.png'); 
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+#logo {
+  height: 53.5px;
+  margin-right: 25px;
+  margin-left: 25px;
+}
+.noPad {
+  padding: 0 !important;
 }
 .p-4 {
     padding: 1rem;
 }
 nav a {
+    
     padding: .5rem;
 }
-
+.content {
+  font-family: 'Avenir Next Cyr Light', sans-serif;
+}
 /* Create a top navigation bar with a black background color  */
 .topnav {
   overflow: hidden;
 }
 
 .navigation {
-  background-color: #786DB1;
+  background-color: #ad44a1;
+  font-family: 'Avenir Next Cyr Light', sans-serif;
 }
 
 
@@ -66,29 +80,29 @@ nav a {
 }
 
 input {
-  background-color: #a59dcc !important;
-  border-color:#a59dcc !important;
+  background-color: #df83b5 !important;
+  border-color: #df83b5 !important;
 }
 .active {
-  background-color: #786DB1 !important;
-  border-color:#786DB1 !important;
+  background-color: #df83b5 !important;
+  border-color:#df83b5 !important;
 }
 select {
-  background-color: #a59dcc !important;
-  border-color:#a59dcc !important;
+  background-color: #df83b5 !important;
+  border-color:#df83b5 !important;
 }
 .input-group-text {
-  background-color: #786DB1 !important;
+  background-color: #df83b5 !important;
 }
 button {
-  background-color: #938AC1 !important;
-  border-color:#938AC1 !important;
+  background-color: #df83b5 !important;
+  border-color:#df83b5 !important;
   color:black !important;
 }
 .sq {
  
   margin: 20px;
-  background-color: #786DB1;
+  background-color: #df83b5;
   border-radius: 10%;
   
 }
@@ -149,6 +163,7 @@ canvas {
     display: flex;
     
   }
+
   .content {
     height: 100%;
   }
@@ -174,5 +189,14 @@ canvas {
   }
   .topnav a {
     width: 100%;
+  }
+  .nick {
+    font-size: 50px !important;
+  }
+  .score {
+    font-size: 40px !important;
+  }
+  .comment {
+    font-size: 30px !important;
   }
 }

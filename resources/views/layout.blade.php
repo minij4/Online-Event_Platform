@@ -21,12 +21,12 @@
     </head>
     <body>
         <div class="topnav navigation">
-            <a href="/">Pagrindinis</a>
-            <a href="/game">Prisijungti į žaidimą</a>
-            <a href="/registration" class="split">Registruotis</a>
-            <a href="/login" class="split">Prisijungti</a>
+            <a href="/" class="noPad"><img id="logo" src="{{ asset('/logo.png') }}"></a>
+            <a href="/game">prisijungti į žaidimą</a>
+            <a href="/registration" class="split">registruotis</a>
+            <a href="/login" class="split">prisijungti</a>
         </div>
-        <div class="relative flex items-top sm:pt-0 welcome">
+        <div class="relative flex items-top sm:pt-0 welcome content">
             @yield('content')
         </div>
 
