@@ -19,7 +19,6 @@ class GetDataController extends Controller
     }
     public function getEvents()
     {
-        
         $data = Event::where('userId','=',self::getUser())->get();
         
         return view('/loged/createGame', ['data'=>$data]);
@@ -45,26 +44,23 @@ class GetDataController extends Controller
         ->groupBy('events.id')
         ->groupBy('games.stage')
         ->get();
-        
-        
-        // ->
-
-
-        // reikia atrinkti pagal etapus ir eventId;;;;;;;;;;;;;
-
+            
+            // ->
+            // reikia atrinkti pagal etapus ir eventId;;;;;;;;;;;;;
+    
         return view('/loged/startGame', ['data'=>$data]);
-        //return $data;
+            //return $data;        
     }
     public function getAllGames()
     {
-        // $data = DB::table('events')
-        //     ->select('events.eventName', 'games.gameName', 'tasks.question', 'tasks.id')
-        //     ->join('games', 'games.eventId', '=', 'events.id')
-        //     ->join('tasks', 'tasks.gameId', '=', 'games.id')
-        //     ->get();
+            // $data = DB::table('events')
+            //     ->select('events.eventName', 'games.gameName', 'tasks.question', 'tasks.id')
+            //     ->join('games', 'games.eventId', '=', 'events.id')
+            //     ->join('tasks', 'tasks.gameId', '=', 'games.id')
+            //     ->get();
 
         $events = Event::where('userId','=', self::getUser())->get();
-        //$tasks = Task::all();
+            //$tasks = Task::all();
 
 
         $games = DB::table('games')
@@ -85,14 +81,14 @@ class GetDataController extends Controller
     }
     public function getAllGames2()
     {
-        // $data = DB::table('events')
-        //     ->select('events.eventName', 'games.gameName', 'tasks.question', 'tasks.id')
-        //     ->join('games', 'games.eventId', '=', 'events.id')
-        //     ->join('tasks', 'tasks.gameId', '=', 'games.id')
-        //     ->get();
+            // $data = DB::table('events')
+            //     ->select('events.eventName', 'games.gameName', 'tasks.question', 'tasks.id')
+            //     ->join('games', 'games.eventId', '=', 'events.id')
+            //     ->join('tasks', 'tasks.gameId', '=', 'games.id')
+            //     ->get();
 
         $events = Event::where('userId','=', self::getUser())->get();
-        //$tasks = Task::all();
+            //$tasks = Task::all();
 
 
         $games = DB::table('games')
@@ -107,7 +103,6 @@ class GetDataController extends Controller
         ->where('events.userId', '=', self::getUser())
         ->select('tasks.id', 'tasks.question')
         ->get();
-
 
         return view('/loged/edit', ['events'=>$events, 'games'=>$games, 'tasks'=>$tasks]);
     }

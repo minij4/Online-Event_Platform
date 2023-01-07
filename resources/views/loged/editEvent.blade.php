@@ -1,15 +1,9 @@
 @extends('/loged/event')
 
-@section('title', 'Creating Event')
+@section('title', 'Editing Event')
 
 @section('content1')
-    <div class="pt-5">
-        @if (\Session::has('success'))
-            <div class="alert alert-success alert-dismissible fade show">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                {!! \Session::get('success') !!}
-            </div>
-            @endif
+    <div class="pt-5">    
         <p>Renginio pavadinimas</p>
         <form method="POST" action="{{ route('event.update', ['eventId' => $event->id]) }}" >
             @csrf

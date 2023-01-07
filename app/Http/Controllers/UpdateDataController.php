@@ -8,10 +8,13 @@ class UpdateDataController extends Controller
 {
     public function updateEvent(Request $request)
     {
-        $chk = DB::update('update events set eventName = ?, stages = ?  where id = ?',[$request->eventName, $request->stages, $request->eventId]);
+        DB::update('update events set eventName = ?, stages = ?  where id = ?',[$request->eventName, $request->stages, $request->eventId]);
         
-        if($chk){
-            return redirect('loged/edit')->with('success', 'Nauji duomenys išsaugoti');
+        if($request->eventName && $request->stages && $request->eventId)
+        {
+            return redirect('loged/edit')->with('success', 'Nauji duomenys išsaugoti!');
+        } else {
+            return redirect('loged/edit')->with('error','Ne visi duomenys suvesti!');
         }
     }
     public function updateGame(Request $request)
@@ -21,6 +24,9 @@ class UpdateDataController extends Controller
         if($chk){
             return redirect('loged/edit')->with('success', 'Nauji duomenys išsaugoti');
         }
+
+
+        //pataisyti errorą 
     }
     public function updateTask(Request $request)
     {
@@ -38,12 +44,14 @@ class UpdateDataController extends Controller
         
         $answerId = $request->answerId;
 
-        if ($request->hasFile('file')) {
-            $path = $request->file('file')->store(
-                'photos', 'public'
-            );
-            DB::update('update tasks set url = ? where id = ?' , [$path, $taskID]);
-        }
+        $url1 = $request->url;
+        $url = str_replace("watch?v=", "embed/", $url1);
+        $url = substr($url, 0, strpos($url, "&"));
+        $url = $url . "?autoplay=1&controls=0";
+
+        DB::update('update tasks set url = ? where id = ?' , [$url, $taskID]);
+        
+
 
         $data = json_decode($data, true);
         

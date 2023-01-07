@@ -38,15 +38,21 @@
                     <div class="box">
                         <div class="image pb-2">
                             <canvas id="canvas"></canvas>
-                            <img  id="image" src="{{ asset($task->url) }}">
+                            <img  id="image" src="{{ $task->url }}">
 
-                            <video id="video" autoplay>
-                                <source src="{{ asset($task->url) }}" type="video/mp4" >
-                                Sorry, your browser does not support HTML5 video.
-                            </video>
-
+                            <div class="cont">
+                                <iframe
+                                    class="responsive-iframe"
+                                    style="border-radius:5px;"
+                                    src="{{ $task->url }}" 
+                                    title="YouTube video player" 
+                                    frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                    >
+                                </iframe>
+                            </div>
                             <audio id="audio" controls autoplay>
-                                <source src="{{ asset($task->url) }}" type="audio/mpeg">
+                                <source src="{{ $task->url }}">
                                 Your browser does not support the audio element.
                             </audio>
                         </div>

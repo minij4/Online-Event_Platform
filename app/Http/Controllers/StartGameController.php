@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use App\Models\Game;
 use App\Models\Task;
+use App\Models\Player;
 use App\Events\CheckStatus;
 use Illuminate\Http\Request;
 
@@ -33,6 +34,10 @@ class StartGameController extends Controller
             $game->status = 1;
             $game->save();  
             event(new CheckStatus("active"));
+
+            Player::truncate();
+            
+
             return redirect()->back()->with('success', 'Žaidimas paleistas');
         }
         else if($active !== null)

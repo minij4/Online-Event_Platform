@@ -9,6 +9,12 @@
             <button type="button" class="close" data-dismiss="alert">&times;</button>
             {!! \Session::get('success') !!}
         </div>
+    @endif
+    @if (\Session::has('error'))
+        <div class="alert alert-danger alert-dismissible fade show">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {!! \Session::get('error') !!}
+        </div>
     @endif  
 <h5>Renginiai</h5>
 <form method="post" action="{{ route('event.edit') }}">

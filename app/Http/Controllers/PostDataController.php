@@ -63,14 +63,13 @@ class PostDataController extends Controller
         $task->question = $request->question;
         $task->answerId = $request->answerRadioId;
 
-        if ($request->hasFile('file')) {
-            $path = $request->file('file')->store(
-                'photos', 'public'
-            );
-            $task->url = $path;
-        }
+        $url = $request->url;
 
-        // asset('storage/avatars/avatar.jpg');
+        // changing youtube video format from watch to embed
+        $task->url = str_replace("watch?v=", "embed/", $url);
+        $task->url = substr($task->url, 0, strpos($task->url, "&"));
+        $task->url = $task->url . "?autoplay=1&controls=0";
+
         $task->save();
 
         // task id

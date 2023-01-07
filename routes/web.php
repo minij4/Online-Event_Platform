@@ -17,6 +17,11 @@ use App\Http\Controllers\GameController;
 
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
+
+
+//middleware
+use App\Http\Middleware\EnsureLogin;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -64,28 +69,28 @@ Route::get('loadGame', [GameController::class, 'loadGame']);
 
 
 /// Loged in 
-Route::get('loged/home', [EventController::class, 'home']);
+Route::get('loged/home', [EventController::class, 'home'])->middleware(EnsureLogin::class);
 
 
 
 /// menu
-Route::get('loged/createEvent', [EventController::class, 'createEvent']);
-Route::get('loged/createStage', [EventController::class, 'createStage']);
-Route::get('loged/createTask', [EventController::class, 'createTask']);
+Route::get('loged/createEvent', [EventController::class, 'createEvent'])->middleware(EnsureLogin::class);
+Route::get('loged/createGame', [EventController::class, 'createGame'])->middleware(EnsureLogin::class);
+Route::get('loged/createTask', [EventController::class, 'createTask'])->middleware(EnsureLogin::class);
 
 
-Route::get('loged/startGame', [EventController::class, 'startGame']);
+Route::get('loged/startGame', [EventController::class, 'startGame'])->middleware(EnsureLogin::class);
 
 
 
 
 /// tasks
 // Event data
-Route::get('loged/createGame', [GetDataController::class, 'getEvents']);
-Route::get('loged/delete', [GetDataController::class, 'getAllGames']);
-Route::get('loged/edit', [GetDataController::class, 'getAllGames2']);
-Route::get('loged/tasks/{taskName?}/{taskType?}', [GetDataController::class, 'getGames']);
-Route::get('loged/startGame', [GetDataController::class, 'getGames2']);
+Route::get('loged/createGame', [GetDataController::class, 'getEvents'])->middleware(EnsureLogin::class);
+Route::get('loged/delete', [GetDataController::class, 'getAllGames'])->middleware(EnsureLogin::class);
+Route::get('loged/edit', [GetDataController::class, 'getAllGames2'])->middleware(EnsureLogin::class);
+Route::get('loged/tasks/{taskName?}/{taskType?}', [GetDataController::class, 'getGames'])->middleware(EnsureLogin::class);
+Route::get('loged/startGame', [GetDataController::class, 'getGames2'])->middleware(EnsureLogin::class);
 
 
 // POST EVENT DATA
@@ -109,6 +114,7 @@ Route::post('deleteTask', [DeleteDataController::class, 'deleteTask'])->name('ta
 Route::post('editEvent', [EditDataController::class, 'editEvent'])->name('event.edit');
 Route::post('editGame', [EditDataController::class, 'editGame'])->name('game.edit');
 Route::post('editTask', [EditDataController::class, 'editTask'])->name('task.edit');
+
 
 // UPDATE EVENT DATA
 Route::post('updateEvent', [UpdateDataController::class, 'updateEvent'])->name('event.update');

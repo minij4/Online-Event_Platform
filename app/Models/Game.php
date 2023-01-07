@@ -14,15 +14,6 @@ class Game extends Model
 
     public $table = "games";
 
-    /// Event on status check
-    protected static function booted()
-    {
-        static::updated(function ($item) {
-            
-        });
-    }
-
-
     public function events()
     {
         return $this->belongsTo('App\Models\Event');

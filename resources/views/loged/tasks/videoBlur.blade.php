@@ -28,12 +28,10 @@
             <div class="row pt-3">
                 <div class="col">
                     <div class="mb-6">
-                        <input type="file" name="file" id="file">
-                        @error('file')<small class="text-red-500">{{ $message }}</small>@enderror
+                        <p>Nuoroda</p>
+                        <input type="text" class="form-control" placeholder="" name="url">
                     </div>
-                    
-                    <p>Trukmė</p>
-                    <input type="text" class="form-control" placeholder="" name="time">
+          
                 </div>
                 <div class="col">
                     <p>Klausimas</p>

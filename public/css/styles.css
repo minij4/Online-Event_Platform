@@ -5,18 +5,17 @@ a {
 }
 html {
   margin: 0;
-  color: #df83b5;
   height:100%;
 }
 body {
-    
-    margin: 0;
-    height: 100%;
-    background: rgb(120,109,177);
-    background: url('../Fonai-03.png'); 
-    background-size: cover;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
+  margin: 0;
+  height: 100%;
+  /* background-color: rgb(120,109,177) !important; */
+  background: url('../Fonas.png');
+
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
 }
 #logo {
   height: 53.5px;
@@ -42,7 +41,7 @@ nav a {
 }
 
 .navigation {
-  background-color: #ad44a1;
+  background-color: #71883F;
   font-family: 'Avenir Next Cyr Light', sans-serif;
 }
 
@@ -50,7 +49,7 @@ nav a {
 /* Style the links inside the navigation bar */
 .topnav a {
   float: left;
-  color: #f2f2f2;
+  color: black;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
@@ -59,19 +58,17 @@ nav a {
 
 /* Change the color of links on hover */
 .topnav a:hover {
-  background-color: #E5CED3;
-  color: black;
+  background-color: #CBDAAA;
+  
 }
 
 /* Create a right-aligned (split) link inside the navigation bar */
 .topnav a.split {
   float: right;
-  color: white;
 }
 
 .table-body {
   height: 500px;
-  
 }
 /*             color of buttons in sukurti užduoti                    */
 .square {
@@ -80,29 +77,29 @@ nav a {
 }
 
 input {
-  background-color: #df83b5 !important;
-  border-color: #df83b5 !important;
+  background-color: #8ba74f !important;
+  border-color: #8ba74f !important;
 }
 .active {
-  background-color: #df83b5 !important;
-  border-color:#df83b5 !important;
+  background-color: #8ba74f !important;
+  border-color:#8ba74f !important;
 }
 select {
-  background-color: #df83b5 !important;
-  border-color:#df83b5 !important;
+  background-color: #8ba74f !important;
+  border-color:#8ba74f !important;
 }
 .input-group-text {
-  background-color: #df83b5 !important;
+  background-color: #8ba74f !important;
 }
 button {
-  background-color: #df83b5 !important;
-  border-color:#df83b5 !important;
+  background-color: #8ba74f !important;
+  border-color:#8ba74f !important;
   color:black !important;
 }
 .sq {
  
   margin: 20px;
-  background-color: #df83b5;
+  background-color: #8ba74f;
   border-radius: 10%;
   
 }
@@ -129,8 +126,26 @@ canvas {
   border-radius: 5%;
 }
 
+#video {
+  max-width: 65%;
+}
+.cont {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding-top: 56.25%; /* 16:9 Aspect Ratio */
+}
 
-
+.responsive-iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
 @media only screen and (min-width: 770px) {
   .box {
     display: flex;
@@ -165,23 +180,23 @@ canvas {
   }
 
   .content {
-    height: 100%;
+    width: 100%;
   }
   .box {
-    height: 80%;
+    width: 100%;
   }
   .image {
-    height: 50%;
+    width: 100%;
   }
   #image {
-    height: 100%;
+    width: 95%;
     
   }
   #video {
-    height: 100%;
+    width: 95%;
   }
   #canvas {
-    height: 100%;
+    width: 95%;
     
   }
   .topnav a.split {

@@ -5,19 +5,13 @@
 @section('content1')
     <div class="">
         <h4>Užduotis</h4>
-        @if (\Session::has('success'))
-                <div class="alert alert-success alert-dismissible fade show">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    {!! \Session::get('success') !!}
-                </div>
-        @endif 
         <form method="POST" action="{{ route('task.update', ['taskId' => $taskId]) }}" enctype="multipart/form-data">
             @csrf
             <div class="row pt-3">
             <div class="col">
                     <div class="mb-6">
-                        <input type="file" name="file" id="file">
-                        @error('file')<small class="text-red-500">{{ $message }}</small>@enderror
+                        <p>Nuoroda</p>
+                        <input type="text" class="form-control" placeholder="" name="url" value="{{ $taskFile }}">
                     </div>
                     
                     <p>Trukmė</p>
@@ -30,7 +24,7 @@
                     <div class="input-group pt-3">
                         <div class="input-group-prepend">
                             <div class="input-group-text">
-                            <input type="radio" name="answerId"> 
+                            <input type="radio" name="answerId" value="{{ $data[0]->id }}" {{ ($data[0]->id==$answerId)? "checked" : "" }}> 
                             </div>
                         </div>
                         <input type="text" name="answerInput1" class="form-control" placeholder="atsakymas" value="{{ $data[0]->answer }}">
@@ -38,7 +32,7 @@
                     <div class="input-group  pt-3">
                         <div class="input-group-prepend">
                             <div class="input-group-text">
-                            <input type="radio" name="answerId" value="2"> 
+                            <input type="radio" name="answerId" value="{{ $data[1]->id }}" {{ ($data[1]->id==$answerId)? "checked" : "" }}> 
                             </div>
                         </div>
                         <input type="text" name="answerInput2" class="form-control" placeholder="atsakymas" value="{{ $data[1]->answer }}">
@@ -46,7 +40,7 @@
                     <div class="input-group pt-3">
                         <div class="input-group-prepend">
                             <div class="input-group-text">
-                            <input type="radio" name="answerId" value="3"> 
+                            <input type="radio" name="answerId" value="{{ $data[2]->id }}" {{ ($data[2]->id==$answerId)? "checked" : "" }}> 
                             </div>
                         </div>
                         <input type="text" name="answerInput3" class="form-control" placeholder="atsakymas" value="{{ $data[2]->answer }}">
@@ -54,7 +48,7 @@
                     <div class="input-group pt-3">
                         <div class="input-group-prepend">
                             <div class="input-group-text">
-                            <input type="radio" name="answerId" value="4"> 
+                            <input type="radio" name="answerId" value="{{ $data[3]->id }}" {{ ($data[3]->id==$answerId)? "checked" : "" }}> 
                             </div>
                         </div>
                         <input type="text" name="answerInput4" class="form-control" placeholder="atsakymas" value="{{ $data[3]->answer }}">

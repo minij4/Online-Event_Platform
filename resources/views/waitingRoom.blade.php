@@ -30,14 +30,37 @@
                 <div class="text-center">
                     
                     <h1 class="display-3 fw-bolder nick">{{ Session::get('nickname') }} </h1>
-                    <h2 class="display-3 fw-bolder score">Jūsų taškai: {{ Session::get('score') }} </h1>
+
+                    @if(isset($players))
+                        @foreach($players as $player)
+                            @if($player->username === Session::get('nickname'))
+                                <h2 class="display-3 fw-bolder score">Jūsų taškai: {{ $player->score }} </h1>
+                            @endif
+                        @endforeach
+                    @endif
                     <p style="font-size:2rem" class="lead fw-normal mb-0 comment">laukiama, kol žaidimas prasidės</p>
 
 
 
                     <!-- SCORES -->
                     <a href="/sessionDelete" class="btn btn-dark" style="color:white !important;">Atsijungti</a>
-
+    
+                    <div class="pt-5">
+                        @if(isset($players))
+                            <table class="table" id="scores">
+                                <tr>
+                                    <th>Žaidėjas</th>
+                                    <th>Taškai</th>
+                                </tr>
+                                @foreach($players as $player)
+                                    <tr>
+                                        <td>{{ $player->username }}</td>
+                                        <td>{{ $player->score }}</td>
+                                    </tr>
+                                @endforeach
+                            </table>
+                        @endif
+                    </div>
                     <div id="txtHint"></div>
 
                 </div>
@@ -49,3 +72,7 @@
         @vite(['resources/js/app.js'])
     </body>
 </html>
+
+<script>
+    
+</script>

@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Models\Game;
 use App\Models\Task;
 use App\Models\Answer;
+use App\Models\Player;
 
 use App\Events\CheckStatus;
 
@@ -18,8 +19,21 @@ class GameController extends Controller
 {
     public function waitingRoom()
     {
+        $players= Player::orderBy('score', 'desc')->get();
+
+        
+        /// neparodomi visi rezultatai jeigu kažkuris užstringa
+        // neišsitrina sessions rezultatai
+        // neišsitrina senieji rezultata
+        
         if(Session::get('nickname')) {
-            return view('/waitingRoom');
+            if(Player::where('username','=', Session::get('nickname'))->first())
+            {
+                return view('/waitingRoom')->with('players', $players);
+            } else {
+                Player::truncate();
+                return view('/waitingRoom');
+            }
         }
     }
     public function game()
@@ -51,9 +65,24 @@ class GameController extends Controller
                 return redirect('task');
             }
         }
+
         /// Kodas po etapo
         ///////////////////
-        return redirect('/waitingRoom');
+
+        $username = Session::get('nickname');
+        $score = Session::get('score');
+
+        $player = new Player;
+        $player->username = $username;
+        $player->score = $score; 
+
+
+        if($player->save()){
+            Session::forget('score');
+            Session::put('score', 0);
+        
+            return redirect('/waitingRoom');
+        }
     }
     public function task(Request $request)
     { 
