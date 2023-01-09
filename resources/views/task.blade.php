@@ -42,6 +42,7 @@
 
                             <div class="cont" id="video">
                                 <iframe
+                                    id="youtubeVideo"
                                     class="responsive-iframe"
                                     style="border-radius:5px;"
                                     src="{{ $task->url }}" 
@@ -162,7 +163,7 @@
             }
 
             
-            if( taskType == 4 || taskType == 5 || taskType == 6 ) {
+            if(taskType == 5 || taskType == 6 ) {
                 console.log(videoTime);
             
                 const [hours, minutes, seconds] = videoTime.split(':');
@@ -178,6 +179,9 @@
 
 
                 var wholeTime = answerTime + 3000;
+            } else if(taskType == 4) {
+                var answerTime = videoTime + 10000;
+                var wholeTime = answerTime + videoTime;
             } else {
                 var answerTime = 10000;
                 var wholeTime = answerTime + 3000;
@@ -209,6 +213,16 @@
                 } else {
                     document.getElementById('answ').innerHTML = "{{ $answer }}";
                 }
+
+                if(taskType == 1) {
+                    const img = document.getElementById('image');
+                    img.classList.remove("blur");
+                } else if(taskType == 4) {
+                    const video = document.getElementById('video');
+                    video.classList.remove("blur");
+                    document.getElementById('youtubeVideo').src = document.getElementById('youtubeVideo').src
+                }
+
             }, answerTime);
 
             window.setTimeout(function() {
