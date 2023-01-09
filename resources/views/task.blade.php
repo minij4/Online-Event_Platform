@@ -230,29 +230,6 @@
             }, wholeTime);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                     ///// Mosaic function
                     if( taskType == 2 ) {
                         const audio = document.getElementById('audio');
