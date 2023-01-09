@@ -55,19 +55,11 @@ class EditDataController extends Controller
     
 
 
-        if(Auth::check()){
-            if($task->type == 1 || $task->type == 2 || $task->type == 3)
-            {
-                return view('loged/editTask1', ['data'=>$data, 'type'=>$task->type, 'taskId'=>$taskID, 'taskFile'=>$taskFile, 'answerId'=>$answerId, 'question'=>$taskQuestion]);
-            }
-            if($task->type == 4 || $task->type == 5 || $task->type == 6)
-            {
-                return view('loged/editTask2', ['data'=>$data, 'type'=>$task->type, 'taskId'=>$taskID, 'taskFile'=>$taskFile, 'answerId'=>$answerId, 'question'=>$taskQuestion, 'time'=>$taskTime]);
-            }
+        //if(Auth::check()){
             
-                
-        }
+        return view('loged/editTask', ['data'=>$data, 'type'=>$task->type, 'taskId'=>$taskID, 'taskFile'=>$taskFile, 'answerId'=>$answerId, 'question'=>$taskQuestion, 'time'=>$taskTime]);   
+        
   
-        return  redirect()->route('login')->with('error', 'You are not loged in!');
+        //return  redirect()->route('login')->with('error', 'You are not loged in!');
     }
 }

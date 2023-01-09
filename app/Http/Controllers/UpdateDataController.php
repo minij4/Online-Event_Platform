@@ -47,24 +47,27 @@ class UpdateDataController extends Controller
         
         $answerId = $request->answerId;
 
-        $url1 = $request->url;
-        
-
+        $url = $request->url;
         $type = $request->type;
 
         if($type == 4 || $type == 5) {
             
-            $url = str_replace("watch?v=", "embed/", $url1);
-            $url = substr($url, 0, strpos($url, "&ab_channel="));
+            if(strpos($url, "watch?v=")) {
+                $url = str_replace("watch?v=", "embed/", $url);
+            }
+            if(strpos($url, "&ab_channel=")) {
+                $url = substr($url, 0, strpos($url, "&ab_channel="));
+            }
 
             // https://www.youtube.com/watch?v=S3Dpfyc15qQ&ab_channel=IntroAndOutro
             // to : 
             // https://www.youtube.com/embed/S3Dpfyc15qQ?autoplay=1&controls=0
-            if(!substr($url, 0, strpos($url, "?autoplay=1&controls=0"))){
+
+            if(!strpos($url, "?autoplay=1&controls=0")){
                 $url = $url . "?autoplay=1&controls=0";
             }
         } else {
-            $url = str_replace("www.dropbox.com", "dl.dropboxusercontent.com", $url1);
+            $url = str_replace("www.dropbox.com", "dl.dropboxusercontent.com", $url);
         }
 
         

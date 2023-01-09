@@ -4,7 +4,7 @@
 
 @section('content1')
     <div class="">
-        <h4>Nuotraukos užduotis</h4>
+        <h4>Užduotis</h4>
         <form method="POST" action="{{ route('task.update', ['taskId' => $taskId, 'type' => $type]) }}" enctype="multipart/form-data">
             @csrf
             <div class="row pt-3">
@@ -12,6 +12,24 @@
                     <div class="mb-6">
                         <p>Nuoroda</p>
                         <input type="text" class="form-control" placeholder="" name="url" value="{{ $taskFile }}">
+
+                        <p>Trukmė</p>
+                        <input type="text" class="form-control" placeholder="" name="time" value="{{ $time }}">
+
+
+                        @if($type == 4 || $type == 5)
+                        <div class="cont" id="video">
+                            <iframe
+                                class="responsive-iframe"
+                                style="border-radius:5px;"
+                                src="{{ $taskFile }}" 
+                                title="YouTube video player" 
+                                frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                >
+                            </iframe>
+                        </div>
+                        @endif
                     </div>
                 </div>
                 <div class="col">

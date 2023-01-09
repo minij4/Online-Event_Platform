@@ -31,6 +31,8 @@
                     <div class="mb-6">
                         <p>Nuoroda</p>
                         <input type="text" class="form-control" placeholder="" name="url">
+                        <p>Trukmė</p>
+                        <input type="text" class="form-control" placeholder="" name="time" value="00:00:00">
                     </div>
                 </div>
                 <div class="col">

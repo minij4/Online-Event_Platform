@@ -67,10 +67,21 @@ class PostDataController extends Controller
 
         if($task->type == 4 || $task->type == 5) {
             
-            // changing youtube video format from watch to embed
-            $task->url = str_replace("watch?v=", "embed/", $url);
-            $task->url = substr($task->url, 0, strpos($task->url, "&"));
-            $task->url = $task->url . "?autoplay=1&controls=0";
+            if(strpos($url, "watch?v=")) {
+                $url = str_replace("watch?v=", "embed/", $url);
+            }
+            if(strpos($url, "&ab_channel=")) {
+                $url = substr($url, 0, strpos($url, "&ab_channel="));
+            }
+            
+            // https://www.youtube.com/watch?v=S3Dpfyc15qQ&ab_channel=IntroAndOutro
+            // to : 
+            // https://www.youtube.com/embed/S3Dpfyc15qQ?autoplay=1&controls=0
+
+            if(!strpos($url, "?autoplay=1&controls=0")){
+                $url = $url . "?autoplay=1&controls=0";
+            }
+            $task->url = $url;
         } else {
 
                   
