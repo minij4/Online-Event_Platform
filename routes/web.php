@@ -22,6 +22,7 @@ use Illuminate\Http\Request;
 //middleware
 use App\Http\Middleware\EnsureLogin;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -37,6 +38,9 @@ use App\Http\Middleware\EnsureLogin;
 
 Route::get('/', function () {
     if(Session::get('nickname')) {
+
+
+
         return redirect('waitingRoom');
     }
     return view('welcome');

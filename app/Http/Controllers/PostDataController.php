@@ -65,10 +65,26 @@ class PostDataController extends Controller
 
         $url = $request->url;
 
-        // changing youtube video format from watch to embed
-        $task->url = str_replace("watch?v=", "embed/", $url);
-        $task->url = substr($task->url, 0, strpos($task->url, "&"));
-        $task->url = $task->url . "?autoplay=1&controls=0";
+        if($task->type == 4 || $task->type == 5) {
+            
+            // changing youtube video format from watch to embed
+            $task->url = str_replace("watch?v=", "embed/", $url);
+            $task->url = substr($task->url, 0, strpos($task->url, "&"));
+            $task->url = $task->url . "?autoplay=1&controls=0";
+        } else {
+
+                  
+                    //DROPBOX
+                    // https://www.dl.dropboxusercontent.com/s/k9dyyxm91pu63ci/1200px-Flag_of_Spain.svg.png?dl=0
+                    // https://www.dropbox.com/s/k9dyyxm91pu63ci/1200px-Flag_of_Spain.svg.png?dl=0
+                                
+            $task->url = str_replace("www.dropbox.com", "dl.dropboxusercontent.com", $url);
+            //$task->url = substr($task->url, 0, strpos($task->url, "/view"));
+        }
+
+
+        
+        
 
         $task->save();
 

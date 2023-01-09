@@ -5,7 +5,7 @@
 @section('content1')
     <div class="">
         <h4>Nuotraukos užduotis</h4>
-        <form method="POST" action="{{ route('task.update', ['taskId' => $taskId]) }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('task.update', ['taskId' => $taskId, 'type' => $type]) }}" enctype="multipart/form-data">
             @csrf
             <div class="row pt-3">
                 <div class="col">

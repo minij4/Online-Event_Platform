@@ -40,7 +40,7 @@
                             <canvas id="canvas"></canvas>
                             <img  id="image" src="{{ $task->url }}">
 
-                            <div class="cont">
+                            <div class="cont" id="video">
                                 <iframe
                                     class="responsive-iframe"
                                     style="border-radius:5px;"
@@ -78,7 +78,7 @@
     </body>
 </html>
         <script>
-        document.getElementById('answBox').style.display = "none";
+            document.getElementById('answBox').style.display = "none";
 
             var taskType = "{{ $task->type }}";
 
@@ -115,6 +115,8 @@
                 canvas.style.display = "none";
                 const audio = document.getElementById('audio');
                 audio.style.display = "none";
+
+                var videoTime = "{{ $task->time }}";
             }
 
             if( taskType == 4 ) {
@@ -127,6 +129,8 @@
                 video.classList.add("blur");
                 const audio = document.getElementById('audio');
                 audio.style.display = "none";
+
+                var videoTime = "{{ $task->time }}";
             }
             if( taskType == 6 ) {
                 const img = document.getElementById('image');
@@ -135,6 +139,9 @@
                 canvas.style.display = "none";
                 const video = document.getElementById('video');
                 video.style.display = "none";
+
+                var videoTime = "{{ $task->time }}";
+
             }
 
             
@@ -145,6 +152,7 @@
 
 
 
+
             function score(id) {
                 console.log(id);
                 choosen = id;
@@ -152,6 +160,30 @@
                 answers.style.display = "none";
                
             }
+
+            
+            if( taskType == 4 || taskType == 5 || taskType == 6 ) {
+                console.log(videoTime);
+            
+                const [hours, minutes, seconds] = videoTime.split(':');
+
+                function convertToSeconds(hours, minutes, seconds) {
+                    return (Number(hours) * 60 * 60 + Number(minutes) * 60 + Number(seconds))*1000;
+                }
+
+                videoTime = convertToSeconds(hours, minutes, seconds);
+                console.log(videoTime);
+
+                var answerTime = videoTime + 10000;
+
+
+                var wholeTime = answerTime + 3000;
+            } else {
+                var answerTime = 10000;
+                var wholeTime = answerTime + 3000;
+            }
+
+            
 
             window.setTimeout(function() {
                 document.getElementById('answers').style.display = "none";
@@ -177,11 +209,11 @@
                 } else {
                     document.getElementById('answ').innerHTML = "{{ $answer }}";
                 }
-            }, 5000);
+            }, answerTime);
 
             window.setTimeout(function() {
                 window.location.href = '/task';
-            }, 10000);
+            }, wholeTime);
 
 
 
@@ -217,13 +249,16 @@
                         video.style.display = "none";
 
                         const canvas = document.getElementById('canvas');
-                        canvas.style.display = "block";
-                    
+                        canvas.style.display = "none";
+
+
                         const img = new Image();
                         const stage = canvas.getContext("2d");
 
-                        img.addEventListener('load', onImage ,false);
                         img.src = "{{ $task->url }}";
+                        img.addEventListener('load', onImage ,false);
+                        
+
 
                         let difficulty = 5;
                         let pieces;
@@ -317,14 +352,34 @@
                                     yPos += pieceHeight;
                                 }
                             }
+                            canvas.style.display = "block";
+
                         }
                         
                         function shuffleArray(o){
                             for(var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+
                             return o;
                         }
+
                     }
 
                     
 
         </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -10,6 +10,7 @@ use App\Models\Event;
 use App\Models\Game;
 use App\Models\Task;
 use App\Models\Answer;
+
 class GetDataController extends Controller
 {
     public function getUser()
@@ -66,14 +67,14 @@ class GetDataController extends Controller
         $games = DB::table('games')
         ->join('events', 'events.id', 'games.eventId')
         ->where('events.userId', '=', self::getUser())
-        ->select('games.id', 'games.gameName')
+        ->select('games.eventId', 'games.id', 'games.gameName')
         ->get();
 
         $tasks = DB::table('tasks')
         ->join('games', 'tasks.gameId', 'games.id')
         ->join('events', 'events.id', 'games.eventId')
         ->where('events.userId', '=', self::getUser())
-        ->select('tasks.id', 'tasks.question')
+        ->select('tasks.gameId', 'tasks.id', 'tasks.question')
         ->get();
 
 
@@ -94,14 +95,14 @@ class GetDataController extends Controller
         $games = DB::table('games')
         ->join('events', 'events.id', 'games.eventId')
         ->where('events.userId', '=', self::getUser())
-        ->select('games.id', 'games.gameName')
+        ->select('games.eventId', 'games.id', 'games.gameName')
         ->get();
 
         $tasks = DB::table('tasks')
         ->join('games', 'tasks.gameId', 'games.id')
         ->join('events', 'events.id', 'games.eventId')
         ->where('events.userId', '=', self::getUser())
-        ->select('tasks.id', 'tasks.question')
+        ->select('tasks.gameId', 'tasks.id', 'tasks.question')
         ->get();
 
         return view('/loged/edit', ['events'=>$events, 'games'=>$games, 'tasks'=>$tasks]);

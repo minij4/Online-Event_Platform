@@ -17,7 +17,7 @@
                         <input type="text" id="gameName" class="form-control" placeholder="" name="gameName" value="{{ $game->gameName }}">
                     </div>
                     <div class="col">
-                        <input class="form-control" type="number" placeholder="{{ $game->stage }}" name="stage" min="1" max="{{ $event->stages }}">
+                        <input class="form-control" type="number" name="stage" min="1" max="{{ $event->stages }}"  value="{{ $game->stage }}">
                     </div>
                     <div class="col">
                         <button type="submit" class="btn btn-dark ">Išsaugoti</button>

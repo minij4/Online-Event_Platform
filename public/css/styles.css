@@ -11,12 +11,20 @@ body {
   margin: 0;
   height: 100%;
   /* background-color: rgb(120,109,177) !important; */
+  
   background: url('../Fonas.png');
-
   background-size: cover;
   background-attachment: fixed;
-  background-repeat: no-repeat;
+  background-repeat: no-repeat; 
+  
+
+  /* background: hsla(88, 40%, 42%, 1);
+  background: radial-gradient(circle, hsla(88, 40%, 42%, 1) 0%, hsla(70, 57%, 63%, 1) 100%);
+  background: -moz-radial-gradient(circle, hsla(88, 40%, 42%, 1) 0%, hsla(70, 57%, 63%, 1) 100%);
+  background: -webkit-radial-gradient(circle, hsla(88, 40%, 42%, 1) 0%, hsla(70, 57%, 63%, 1) 100%);
+  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#6E9740", endColorstr="#C5D76C", GradientType=1 ); */
 }
+
 #logo {
   height: 53.5px;
   margin-right: 25px;
@@ -133,7 +141,8 @@ canvas {
   position: relative;
   width: 100%;
   overflow: hidden;
-  padding-top: 56.25%; /* 16:9 Aspect Ratio */
+  padding-top: 300px;
+  padding-right: 500px; /* 16:9 Aspect Ratio */
 }
 
 .responsive-iframe {
@@ -145,6 +154,13 @@ canvas {
   width: 100%;
   height: 100%;
   border: none;
+}
+/* Editing deleting */
+
+#myInput {
+  padding: 5px;
+  margin: 10px;
+  border-radius: 5px;
 }
 @media only screen and (min-width: 770px) {
   .box {
@@ -187,16 +203,24 @@ canvas {
   }
   .image {
     width: 100%;
+
   }
   #image {
-    width: 95%;
-    
+    min-width: 50%;
+    max-width: 95%;
+    max-height: 250px;
+
   }
   #video {
-    width: 95%;
+    min-width: 50%;
+    max-width: 95%;
+    max-height: 250px;
+
   }
   #canvas {
-    width: 95%;
+    min-width: 50%;
+    max-width: 95%;
+    max-height: 250px;
     
   }
   .topnav a.split {

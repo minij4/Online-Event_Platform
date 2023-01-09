@@ -28,6 +28,10 @@
         </li>
     </ul>
 
+        <h4>Patarimas:</h4>
+        <p>Video failų nuorodas kelti iš <strong>Youtube.com</strong>.</p>
+        <p>Nuotraukų failus ir audio įrašus iš <strong>DropBox.com</strong>.</p>
+        <p>Įkelti iš kitur failai gali neveikti.</p>
 
     <!-- <canvas id="canvas" style="height:250px; "></canvas> -->
     <script>
