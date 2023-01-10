@@ -117,7 +117,6 @@
                 const audio = document.getElementById('audio');
                 audio.style.display = "none";
 
-                var videoTime = "{{ $task->time }}";
             }
 
             if( taskType == 4 ) {
@@ -131,7 +130,6 @@
                 const audio = document.getElementById('audio');
                 audio.style.display = "none";
 
-                var videoTime = "{{ $task->time }}";
             }
             if( taskType == 6 ) {
                 const img = document.getElementById('image');
@@ -141,7 +139,6 @@
                 const video = document.getElementById('video');
                 video.style.display = "none";
 
-                var videoTime = "{{ $task->time }}";
 
             }
 
@@ -163,28 +160,29 @@
             }
 
             
-            if(taskType == 5 || taskType == 6 ) {
-                console.log(videoTime);
-            
-                const [hours, minutes, seconds] = videoTime.split(':');
+
+            /// Laikas kurį bus rodoma užduotis
+            var taskTime = "{{ $task->time }}";
+            const [hours, minutes, seconds] = taskTime.split(':');
 
                 function convertToSeconds(hours, minutes, seconds) {
                     return (Number(hours) * 60 * 60 + Number(minutes) * 60 + Number(seconds))*1000;
                 }
 
-                videoTime = convertToSeconds(hours, minutes, seconds);
-                console.log(videoTime);
+            taskTime = convertToSeconds(hours, minutes, seconds);
 
-                var answerTime = videoTime + 10000;
-
-
+            if(taskType == 5 || taskType == 6 ) {
+                var answerTime = taskTime + 10000;
                 var wholeTime = answerTime + 3000;
+
             } else if(taskType == 4) {
-                var answerTime = videoTime + 10000;
-                var wholeTime = answerTime + videoTime;
+                var answerTime = taskTime + 10000;
+                var wholeTime = answerTime + taskTime;
             } else {
-                var answerTime = 10000;
+                var answerTime = taskTime;
                 var wholeTime = answerTime + 3000;
+
+                console.log(answerTime);
             }
 
             
@@ -209,6 +207,7 @@
                         }
                     });
 
+                    /// kas rodoma pasibaigus atsakymo laikui
                     document.getElementById('comment').innerHTML = "Atsakėte teisingai!";
                 } else {
                     document.getElementById('answ').innerHTML = "{{ $answer }}";
@@ -221,6 +220,11 @@
                     const video = document.getElementById('video');
                     video.classList.remove("blur");
                     document.getElementById('youtubeVideo').src = document.getElementById('youtubeVideo').src
+                } else if(taskType == 2) {
+                    const canvas = document.getElementById('canvas');
+                    canvas.style.display = "none";
+                    const img2 = document.getElementById('image');
+                    img2.style.display = "block";
                 }
 
             }, answerTime);
