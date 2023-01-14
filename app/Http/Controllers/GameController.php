@@ -139,25 +139,33 @@ class GameController extends Controller
     }
     public function postPlayer(Request $request)
     {
-        //$img = time()."_".$request->photo->getClientOriginalName();
-        //$hobbies = implode(',', $request->hobbies);
-        //$request->photo->move(public_path('uploads'), $img);
-
         $nickname = $request->nickname;
     
         if($nickname){
             Session::put('nickname', $nickname);
             Session::put('score', 0);
 
-            $player = new Player;
-            $player->username = $nickname;
-            $player->save();
-            event(new CheckPlayerPost("New player posted"));
+            // tikrinimas ar nesikartoja nicknames
+            if(Player::where('username','=', Session::get('nickname'))->first()) {
+                $request->session()->flush();
 
-            
-            return redirect('waitingRoom');
-        } else {
-            return redirect()->back()->with('error', 'Vardas užimtas');
+                return redirect('game')->with('error', 'Vardas Užimtas');
+
+            } else {
+                $player = new Player;
+                $player->username = $nickname;
+                $player->save();
+
+                //tikrina ar išsaugotas žaidėjas
+                if($player) {
+                    event(new CheckPlayerPost("New player posted"));
+
+                    return redirect('waitingRoom');
+                } else {
+                    return redirect('game')->with('error', 'Nepavyko išsaugoti žaidėjo');
+
+                }
+            }   
         }
     }
 
