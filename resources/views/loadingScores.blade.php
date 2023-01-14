@@ -45,26 +45,18 @@
                     <a href="/sessionDelete" class="btn btn-dark" style="color:white !important;">Atsijungti</a>
     
                     <div class="pt-5">
-                        @if(isset($players))
-                            <table class="table" id="scores">
-                                <tr>
-                                    <th>Žaidėjas</th>
-                                    <th>Taškai</th>
-                                </tr>
-                                @foreach($players as $player)
-                                    <tr>
-                                        <td>{{ $player->username }}</td>
-                                        <td>{{ $player->score }}</td>
-                                    </tr>
-                                @endforeach
-                            </table>
-                        @endif
+                        <h3>Rezultatai</h3>
+                        <div class="spinner-border text-success"></div>
                     </div>
                     <div id="txtHint"></div>
                 </div>
             </div>
         </div>
-        <div id="app"></div>
-        @vite(['resources/js/app.js'])
+        <script>
+            window.setTimeout(function() {
+                    window.location.href = '/waitingRoom';
+            }, 5000);
+        </script>
     </body>
 </html>
+

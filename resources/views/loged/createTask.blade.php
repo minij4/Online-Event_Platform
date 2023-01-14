@@ -33,8 +33,15 @@
         <p>Nuotraukų failus ir audio įrašus iš <strong>DropBox.com</strong>.</p>
         <p>Įkelti iš kitur failai gali neveikti.</p>
 
-    <!-- <canvas id="canvas" style="height:250px; "></canvas> -->
-    <script>
+
+
+        
+<!--
+<canvas id="canvas" style="height:250px; "></canvas>
+<script>
+
+// MOZAIKOS SCRIPTAS
+
 
 const PUZZLE_HOVER_TINT = '#009900';
  
@@ -161,5 +168,9 @@ const PUZZLE_HOVER_TINT = '#009900';
      for(var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
      return o;
  }
-    </script>
+</script>
+
+
+-->
+
 @endsection

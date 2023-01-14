@@ -11,12 +11,9 @@ use App\Models\Game;
 use App\Models\Task;
 use App\Models\Answer;
 
-
-
-
 class GetDataController extends Controller
 {
-    // used in controller
+    // used in this controller
     public function getUser()
     {
         return Auth::id();
@@ -48,7 +45,7 @@ class GetDataController extends Controller
 
     // used in routes functions
 
-    public function createGame()
+    public function showEvents()
     {
         return view('/loged/createGame', ['data'=>self::getEvents()]);
     }

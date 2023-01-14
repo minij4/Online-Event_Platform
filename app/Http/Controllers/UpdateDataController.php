@@ -27,8 +27,6 @@ class UpdateDataController extends Controller
         } else {
             return redirect('loged/edit')->with('error','Ne visi duomenys suvesti!');
         }
-
-        //pataisyti errorą 
     }
     public function updateTask(Request $request)
     {
@@ -70,10 +68,8 @@ class UpdateDataController extends Controller
             $url = str_replace("www.dropbox.com", "dl.dropboxusercontent.com", $url);
         }
 
-        
         $data = json_decode($data, true);
 
-       
         if($url && $request->question && $answerId && $taskID && $request->answerInput1 
             && $request->answerInput2 && $request->answerInput3 && $request->answerInput4)
         {

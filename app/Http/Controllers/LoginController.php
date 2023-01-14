@@ -63,8 +63,6 @@ class LoginController extends Controller
 		]);
     }    
 
-    
-    
     public function signOut() {
         Session::flush();
         Auth::logout();

@@ -38,20 +38,19 @@ use App\Http\Middleware\EnsureLogin;
 
 Route::get('/', function () {
     if(Session::get('nickname')) {
-
-
-
         return redirect('waitingRoom');
     }
     return view('welcome');
 });
+
+
 Route::get('setData', [SessionController::class, 'setData'])->name('session.create');
 
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::get('/registration', [LoginController::class, 'registration']);
 
-Route::post('custom-login', [LoginController::class, 'customLogin'])->name('login.custom'); 
+Route::post('custom-login', [LoginController::class, 'customLogin'])->name('login.custom');
 Route::post('custom-registration', [LoginController::class, 'customRegistration'])->name('register.custom');
 
 Route::get('/logout',[LoginController::class, 'signout']);
@@ -72,42 +71,43 @@ Route::get('loadGame', [GameController::class, 'loadGame']);
 
 
 
-/// Loged in 
-Route::get('loged/home', [EventController::class, 'home'])->middleware(EnsureLogin::class);
 
+/// Loged in
+Route::middleware(EnsureLogin::class)->group(function () {
+    Route::get('loged/home', [EventController::class, 'home']);
 
+    Route::prefix('loged')->group(function () {
+         /// menu
+        Route::get('/createEvent', [EventController::class, 'createEvent']);
+        Route::get('/createGame', [EventController::class, 'createGame']);
+        Route::get('/createTask', [EventController::class, 'createTask']);
 
-/// menu
-Route::get('loged/createEvent', [EventController::class, 'createEvent'])->middleware(EnsureLogin::class);
-Route::get('loged/createGame', [EventController::class, 'createGame'])->middleware(EnsureLogin::class);
-Route::get('loged/createTask', [EventController::class, 'createTask'])->middleware(EnsureLogin::class);
+        Route::get('/startGame', [EventController::class, 'startGame']);
 
+        /// tasks
+        // Event data
+        Route::get('/createGame', [GetDataController::class, 'showEvents']);
 
-Route::get('loged/startGame', [EventController::class, 'startGame'])->middleware(EnsureLogin::class);
+        Route::get('/delete', [GetDataController::class, 'delete']);
+        Route::get('/edit', [GetDataController::class, 'edit']);
 
+        Route::get('/tasks/{taskName?}/{taskType?}', [GetDataController::class, 'showGames']);
 
-
-
-/// tasks
-// Event data
-Route::get('loged/createGame', [GetDataController::class, 'createGame'])->middleware(EnsureLogin::class);
-
-Route::get('loged/delete', [GetDataController::class, 'delete'])->middleware(EnsureLogin::class);
-Route::get('loged/edit', [GetDataController::class, 'edit'])->middleware(EnsureLogin::class);
-
-Route::get('loged/tasks/{taskName?}/{taskType?}', [GetDataController::class, 'showGames'])->middleware(EnsureLogin::class);
-
-Route::get('loged/startGame', [GetDataController::class, 'showGroupedGames'])->middleware(EnsureLogin::class);
+        Route::get('/startGame', [GetDataController::class, 'showGroupedGames']);
+    });
+});
 
 
 // POST EVENT DATA
-Route::post('postEvent', [PostDataController::class, 'postEvent'])->name('event.post'); 
+Route::post('postEvent', [PostDataController::class, 'postEvent'])->name('event.post');
 Route::post('postGame', [PostDataController::class, 'postGame'])->name('game.post');
 Route::post('postTask', [PostDataController::class, 'postTask'])->name('task.post');
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 // listens event
 Route::get('waitingRoom', [GameController::class, 'waitingRoom']);
+Route::get('loadingScores', [GameController::class, 'loadingScores']);
+
 // fire event
 Route::post('startGame', [StartGameController::class, 'startGame'])->name('start.post');
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -127,6 +127,14 @@ Route::post('editTask', [EditDataController::class, 'editTask'])->name('task.edi
 Route::post('updateEvent', [UpdateDataController::class, 'updateEvent'])->name('event.update');
 Route::post('updateGame', [UpdateDataController::class, 'updateGame'])->name('game.update');
 Route::post('updateTask', [UpdateDataController::class, 'updateTask'])->name('task.update');
+
+
+
+// ERRORS
+// Route::fallback(function () {
+//     return view('error');
+// });
+
 
 
 

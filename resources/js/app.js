@@ -37,6 +37,10 @@ const app = createApp({
                 // žaidimo pradžia
                 window.location.href = "/loadGame";
         });
+        window.Echo.channel('player')
+            .listen('CheckPlayerPost', (e) => {
+                window.location.href = "/waitingRoom";
+        });
     }
 });
 

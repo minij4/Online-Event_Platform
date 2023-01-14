@@ -13,28 +13,30 @@ use App\Models\Task;
 use App\Models\Answer;
 use App\Models\Player;
 
-use App\Events\CheckStatus;
+use App\Events\CheckPlayerPost;
 
 class GameController extends Controller
 {
-    public function waitingRoom()
+    public function waitingRoom(Request $request)
     {
         $players= Player::orderBy('score', 'desc')->get();
 
-        
-        /// neparodomi visi rezultatai jeigu kažkuris užstringa
-        // neišsitrina sessions rezultatai
-        // neišsitrina senieji rezultata
-        
         if(Session::get('nickname')) {
             if(Player::where('username','=', Session::get('nickname'))->first())
             {
+
                 return view('/waitingRoom')->with('players', $players);
             } else {
-                Player::truncate();
                 return view('/waitingRoom');
             }
+        } else {
+            return redirect('/');
         }
+    }
+    public function loadingScores()
+    {
+        return view('/loadingScores');
+
     }
     public function game()
     { 
@@ -46,6 +48,8 @@ class GameController extends Controller
     public function loadGame(Request $request)
     { 
         if(Session::get('nickname')) {
+            //DB::table('players')->update(['score' => 0]);
+            
             if(Game::where('status','=', 1)->first()) {
                 $game = Game::where('status','=', 1)->first();
                 $gameId = $game->id;
@@ -74,15 +78,18 @@ class GameController extends Controller
 
         $player = new Player;
         $player->username = $username;
-        $player->score = $score; 
+        $player->score = $score;
+        $player->save();
 
+        //Player::where('score', 0)->delete();
 
-        if($player->save()){
+        if($player){
             Session::forget('score');
             Session::put('score', 0);
         
-            return redirect('/waitingRoom');
+            return redirect('/loadingScores');
         }
+
     }
     public function task(Request $request)
     { 
@@ -139,8 +146,15 @@ class GameController extends Controller
         $nickname = $request->nickname;
     
         if($nickname){
-            session()->put('nickname', $nickname);
-            session()->put('score', 0);
+            Session::put('nickname', $nickname);
+            Session::put('score', 0);
+
+            $player = new Player;
+            $player->username = $nickname;
+            $player->save();
+            event(new CheckPlayerPost("New player posted"));
+
+            
             return redirect('waitingRoom');
         } else {
             return redirect()->back()->with('error', 'Vardas užimtas');
@@ -151,6 +165,9 @@ class GameController extends Controller
     {
         if($request->session()->has('nickname'))
         {
+            event(new CheckPlayerPost("Player was deleted"));
+            Player::where('username', Session::get('nickname'))->delete();
+
             $request->session()->flush();
         }
         return redirect('/');

@@ -23,8 +23,6 @@ class StartGameController extends Controller
 
         $active = Game::where('status', '=', 1)->first();
 
-        
-
         if ($active === null) {
             // for update all stage status
             $data = Game::where(['eventId'=>$eventId,'stage'=>$stage])->update(['status'=>1]);
@@ -36,17 +34,16 @@ class StartGameController extends Controller
             event(new CheckStatus("active"));
 
             Player::truncate();
-            
-
+        
             return redirect()->back()->with('success', 'Žaidimas paleistas');
         }
         else if($active !== null)
         {
             if($game->status === 1)
             {
-                //DB::update('update games set status = ? where eventId = ? AND stage = ?',[0, $eventId, $stage]);
                 Game::where(['eventId'=>$eventId,'stage'=>$stage])->update(['status'=>0]);
                 DB::update('update tasks set status = ? where status = ?' , [0, 1]);
+
                 return redirect()->back()->with('success', 'Žaidimas sustabdytas');
             }
             else

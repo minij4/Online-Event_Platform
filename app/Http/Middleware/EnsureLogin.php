@@ -22,7 +22,6 @@ class EnsureLogin
             
         } else {
             return  redirect()->route('login')->with('error', 'You are not loged in!');    
-
         }
 
         return $next($request);

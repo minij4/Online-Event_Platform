@@ -29,6 +29,7 @@
                     </div>
                     <div class="col">
                         @foreach ($data as $row)
+                        <!-- Čia rodytų visų visų events etapus, tačiau scriptas paleidžia tik tuos etapus, kurio event yra aktyvus pagal row->id -->
                         <div class="stages" id="{{ $row->id }}" style="display: none">
                             <p>Žaidimas priskiriamas etapui</p>
                             <input class="form-control" type="number" name="{{ $row->id }}" min="1" max="{{ $row->stages }}">
@@ -44,15 +45,20 @@
             </form>
     </div>
 
-<script type="text/javascript">
-    $(document).ready(function() {
-        $(".stages:first").css("display", "block");
-    });
-    $('#eventName').on('change', function()
-    {
-        $(".stages").css("display", "none");
-        var id = $(this).find('option:selected').val();
-        $("#" + id).css("display", "block");
-    }); 
-</script>
+<!-- 
+    Jei pasikeičia #eventName tada atnaujiną .stages rodymą. 
+    t.y. pasikeitus renginiui pasikeičia ir jo turimas etapų skaičius 
+-->
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(".stages:first").css("display", "block");
+        });
+        $('#eventName').on('change', function()
+        {
+            $(".stages").css("display", "none");
+            var id = $(this).find('option:selected').val();
+            $("#" + id).css("display", "block");
+        }); 
+    </script>
 @endsection

@@ -15,6 +15,8 @@ class DeleteDataController extends Controller
         
         if($event->delete()){
             return redirect()->back()->with('success', 'Renginys ištrintas');
+        } else {
+            
         }
     } 
     public function deleteGame(Request $request)

@@ -22,10 +22,6 @@ class PostDataController extends Controller
 
     public function postEvent(Request $request)
     {  
-        //$img = time()."_".$request->photo->getClientOriginalName();
-        //$hobbies = implode(',', $request->hobbies);
-        //$request->photo->move(public_path('uploads'), $img);
-
         $event = new Event;
         $event->eventName = $request->eventName;
         $event->stages = $request->stages;
@@ -35,7 +31,6 @@ class PostDataController extends Controller
             return redirect()->back()->with('success', 'Renginys sukurtas');
         }
     }
-
     public function postGame(Request $request)
     {  
         $game = new Game;
@@ -83,28 +78,16 @@ class PostDataController extends Controller
             }
             $task->url = $url;
         } else {
-
-                  
                     //DROPBOX
                     // https://www.dl.dropboxusercontent.com/s/k9dyyxm91pu63ci/1200px-Flag_of_Spain.svg.png?dl=0
-                    // https://www.dropbox.com/s/k9dyyxm91pu63ci/1200px-Flag_of_Spain.svg.png?dl=0
-                                
+                    // https://www.dropbox.com/s/k9dyyxm91pu63ci/1200px-Flag_of_Spain.svg.png?dl=0                  
             $task->url = str_replace("www.dropbox.com", "dl.dropboxusercontent.com", $url);
-            //$task->url = substr($task->url, 0, strpos($task->url, "/view"));
         }
-
-
         
-        
-
         $task->save();
 
-        // task id
         $taskID = $task->id;
-        //
-
-        //post answers 
-
+     
         $answer1 = new Answer;
         $answer1->taskId = $taskID;
         $answer1->answer = $request->answerInput1;
