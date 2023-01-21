@@ -1,4 +1,4 @@
-<img style="width:90px" src="public/minija.png"><img>
+<img style="width:100px; margin-left:-20px;" src="public/images/logo_transparent.png"><img>
 
 #   Laravel project
 
