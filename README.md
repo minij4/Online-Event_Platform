@@ -13,8 +13,10 @@ that would allow you to create and participate in quizzes game.
 
 ### To start server:
 * download files
-* run php artisan serve
-* run npm run dev
+```
+php artisan serve
+npm run dev
+```
 * start xampp Apache and Mysql
 
 <br>
