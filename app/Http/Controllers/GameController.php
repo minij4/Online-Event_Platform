@@ -19,7 +19,7 @@ class GameController extends Controller
 {
     public function waitingRoom(Request $request)
     {
-        $players= Player::orderBy('score', 'desc')->get();
+        $players= Player::orderBy('score', 'desc')->paginate(3);
 
         if(Session::get('nickname')) {
             if(Player::where('username','=', Session::get('nickname'))->first())
