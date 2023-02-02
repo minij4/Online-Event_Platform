@@ -229,6 +229,8 @@
 
             }, answerTime);
 
+
+            // Užduočių paleidimas
             window.setTimeout(function() {
                 window.location.href = '/task';
             }, wholeTime);

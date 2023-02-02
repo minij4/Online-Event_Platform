@@ -13,18 +13,19 @@ use App\Models\Task;
 use App\Models\Answer;
 use App\Models\Player;
 
+
 use App\Events\CheckPlayerPost;
 
 class GameController extends Controller
 {
     public function waitingRoom(Request $request)
     {
-        $players= Player::orderBy('score', 'desc')->paginate(3);
+        if(Player::exists()) {
+            $players = Player::orderBy('score', 'desc')->paginate(3);
+        }
 
         if(Session::get('nickname')) {
-            if(Player::where('username','=', Session::get('nickname'))->first())
-            {
-
+            if(isset($players)) {
                 return view('/waitingRoom')->with('players', $players);
             } else {
                 return view('/waitingRoom');
@@ -141,31 +142,41 @@ class GameController extends Controller
     {
         $nickname = $request->nickname;
     
+        // if($nickname){
+        //     Session::put('nickname', $nickname);
+        //     Session::put('score', 0);
+
+        //     // tikrinimas ar nesikartoja nicknames
+        //     if(Player::where('username','=', Session::get('nickname'))->first()) {
+        //         $request->session()->flush();
+
+        //         return redirect('game')->with('error', 'Vardas Užimtas');
+
+        //     } else {
+        //         $player = new Player;
+        //         $player->username = $nickname;
+        //         $player->save();
+
+        //         //tikrina ar išsaugotas žaidėjas
+        //         if($player) {
+        //             event(new CheckPlayerPost("New player posted"));
+
+        //             return redirect('waitingRoom');
+        //         } else {
+        //             return redirect('game')->with('error', 'Nepavyko išsaugoti žaidėjo');
+
+        //         }
+        //     }   
+        // }
+
         if($nickname){
             Session::put('nickname', $nickname);
             Session::put('score', 0);
 
-            // tikrinimas ar nesikartoja nicknames
-            if(Player::where('username','=', Session::get('nickname'))->first()) {
-                $request->session()->flush();
-
-                return redirect('game')->with('error', 'Vardas Užimtas');
-
-            } else {
-                $player = new Player;
-                $player->username = $nickname;
-                $player->save();
-
-                //tikrina ar išsaugotas žaidėjas
-                if($player) {
-                    event(new CheckPlayerPost("New player posted"));
-
-                    return redirect('waitingRoom');
-                } else {
-                    return redirect('game')->with('error', 'Nepavyko išsaugoti žaidėjo');
-
-                }
-            }   
+            if(Player::exists()) {
+                Player::truncate();
+            }
+            return redirect('waitingRoom');
         }
     }
 

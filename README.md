@@ -26,5 +26,9 @@ Or simply check here:
 [Website online (not working yet)](https://tryskaraliai.online)
 
 
+[Figma desgin](https://www.figma.com/file/q21gxorFs0EsaPKxq6VxR8/CV-website?node-id=0%3A1&t=1tWp2hohV6sIBs7T-1)
+
+
+
 
 
