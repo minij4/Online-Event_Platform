@@ -229,11 +229,25 @@
 
             }, answerTime);
 
-
             // Užduočių paleidimas
-            window.setTimeout(function() {
-                window.location.href = '/task';
-            }, wholeTime);
+
+            window.addEventListener("load", (event) => {
+                window.setTimeout(function() {
+                    window.location.href = '/task';
+                }, wholeTime);
+            });
+
+
+            // function loaded() {
+            //     // window.setTimeout(function() {
+            //     //     window.location.href = '/task';
+            //     // }, wholeTime);
+            //     setTimeout(() => window.location.href = '/task',  wholeTime); 
+            // }
+            // document.body.addEventListener("load", loaded);
+
+            
+            
 
 
                     ///// Mosaic function

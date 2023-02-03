@@ -55,7 +55,7 @@
         <script>
             window.setTimeout(function() {
                     window.location.href = '/waitingRoom';
-            }, 5000);
+            }, 3000);
         </script>
     </body>
 </html>

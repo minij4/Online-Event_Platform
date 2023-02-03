@@ -206,9 +206,12 @@ canvas {
 
   }
   #image {
-    min-width: 50%;
+    /* min-width: 50%;
     max-width: 95%;
+    max-height: 250px; */
     max-height: 250px;
+    width: auto;
+    max-width: 95%;
 
   }
   #video {
