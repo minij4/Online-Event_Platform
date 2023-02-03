@@ -32,10 +32,10 @@
         <p>Video failų nuorodas kelti iš <strong>Youtube.com</strong>.</p>
         <p>Nuotraukų failus ir audio įrašus iš <strong>DropBox.com</strong>.</p>
         <p>Įkelti iš kitur failai gali neveikti.</p>
-        <p>Rekomenduojamas nuotraukos dydis: 1200x800p.</p>
-        <p>arba 491x580p</p>
+        <p>Rekomenduojamas nuotraukos dydis apie: 1200x800p.</p>
+        <p>arba apie: 491x580p</p>
 
-        
+
 <!--
 <canvas id="canvas" style="height:250px; "></canvas>
 <script>
