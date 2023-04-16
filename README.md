@@ -23,7 +23,7 @@ npm run dev
 
 Or simply check here:
 
-[Website online](https://tryskaraliai.online)
+[Website online](https://onlinetryskaraliai.com/)
 
 
 
